@@ -26,7 +26,10 @@ If the command did not error out, you can now `cd` to a folder named `dinder`.
 On terminal inside your `dinder` directory, type:
 
 1. `npm install` to install all the necessary packages to run the application,
-2. `npm run dev` to start development server.
+2. To start development, follow any commands below as needed for your task:
+   1. `npm run start:client` to start the frontend only,
+   2. `npm run start:server` to start the backend only,
+   3. `npm run dev` to start both frontend and backend,
 
 If the commands did not error out, then congrats! You've successfully started the application and are ready to make some changes. You can visit `http://localhost:3000/` to view the website and `http://localhost:3001/` to access the server.
 
