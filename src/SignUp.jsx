@@ -150,6 +150,7 @@ export default function SignUp() {
       <button
         className="SignUpYellowButton"
         onClick={() => {
+          // @TODO: Remove this and replace with route and save data to database
           console.log(`Preferred Name: ${preferredName}`);
           console.log(`Year: ${years[yearIndex]}`);
           console.log(`Pronoun: ${pronouns[pronounIndex]}`);
