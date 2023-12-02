@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Dinder Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the dinder web application. Made by Won Kim, Fa Taepaisitphongse, Loc Mai, and Alex Gu
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+This section will walk you through the steps to set up your laptop for development.
 
-### `npm start`
+### Application Dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We will need to install [Node.js](https://nodejs.org/en/about) to run React and set up our backend. You can verify whether Node.js is installed by typing `which node` on the terminal.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Acquiring the code
 
-### `npm test`
+In your terminal, navigate to where you want the `dinder` directory containing the source code. To pull the code, run the following command:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+# Terminal
+git clone https://github.com/locmai1/dinder.git
+```
 
-### `npm run build`
+If the command did not error out, you can now `cd` to a folder named `dinder`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Environment Variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We will need credentials to connect with MongoDB. It is bad security practice to commit these credentials to the codebase. Create a `.env` directly under the root directory; this file does not already exist, but there is a `.env-example` for you to copy over. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running The Application
 
-### `npm run eject`
+On terminal inside your `dinder` directory, type:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. `npm install` to install all the necessary packages to run the application,
+2. `npm run start` to start development server.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If the commands did not error out, then congrats! You've successfully started the server and are ready to make some changes. You can visit `http://localhost:3000/` to view the website.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Development
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This section outlines some guidelines and expectations for development.
 
-## Learn More
+### Making Changes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The general process to follow before starting your task is as follows:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. `git checkout main`
+2. `git checkout -b <Your name>/<Task>`
+3. Make your changes
+4. Once you're happy with your changes:
+   1. `git add <file 1> <file 2> ... <file n>` if you want to stage some files or `git add .` if you want to stage all files to commit for version control,
+   2. `git commit -m "<A message to describe your changes>"`,
+5. Go to the [GitHub repository](https://github.com/locmai1/dinder) to make a Pull Request (PR).
 
-### Code Splitting
+## Resources / Additional Information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Figma
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+When carrying out your task, please refer to the Figma design made by Fa [here](https://www.figma.com/file/HpGWsP1aUet15WpXEmhkWh/Dinder?type=design&node-id=806-469&mode=design). Please try to get your task as closely related to the design as possible and also keep in mind the mobile responsive as well. 
