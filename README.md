@@ -21,18 +21,14 @@ git clone https://github.com/locmai1/dinder.git
 
 If the command did not error out, you can now `cd` to a folder named `dinder`.
 
-### Environment Variables
-
-We will need credentials to connect with MongoDB. It is bad security practice to commit these credentials to the codebase. Create a `.env` directly under the root directory; this file does not already exist, but there is a `.env-example` for you to copy over. 
-
 ### Running The Application
 
 On terminal inside your `dinder` directory, type:
 
 1. `npm install` to install all the necessary packages to run the application,
-2. `npm run start` to start development server.
+2. `npm run dev` to start development server.
 
-If the commands did not error out, then congrats! You've successfully started the server and are ready to make some changes. You can visit `http://localhost:3000/` to view the website.
+If the commands did not error out, then congrats! You've successfully started the application and are ready to make some changes. You can visit `http://localhost:3000/` to view the website and `http://localhost:3001/` to access the server.
 
 ## Development
 
