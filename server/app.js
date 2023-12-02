@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 // EVENT ROUTES
 
-const port = process.env.PORT || 3001;
+const port = config.port || 3001;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
