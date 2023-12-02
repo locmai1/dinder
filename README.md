@@ -1,4 +1,4 @@
-# Dinder Web App
+# Dinder Web Application
 
 This is the dinder web application. Made by Won Kim, Fa Taepaisitphongse, Loc Mai, and Alex Gu
 
