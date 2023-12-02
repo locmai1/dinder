@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const config = require("./config/config");
+const User = require("./models/userModel");
+const Event = require("./models/eventModel");
 
 const app = express();
 
@@ -9,8 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const dbURI =
-  "mongodb+srv://dinder:dinder@cluster0.nq5tg7n.mongodb.net/dinder?retryWrites=true&w=majority";
+const dbURI = config.dbURI;
 mongoose
   .connect(dbURI)
   .then(() => {
@@ -21,6 +23,10 @@ mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Dinder's backend!" });
 });
+
+// USER ROUTES
+
+// EVENT ROUTES
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
