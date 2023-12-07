@@ -31,6 +31,10 @@ const userSchema = new Schema({
     type: [String],
     default: [],
   },
+  premium: {
+    type: Boolean,
+    default: false,
+  },
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,
