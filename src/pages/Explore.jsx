@@ -1,7 +1,7 @@
-import "./styles/Explore.css";
-import Navbar from "./Navbar";
+import "../styles/Explore.css";
+import Navbar from "../components/Navbar";
 import { useState } from "react";
-import ExploreFilter from "./ExploreFilter";
+import ExploreFilter from "../components/ExploreFilter";
 
 export default function Explore() {
   const [filterOpen, setFilterOpen] = useState(false);
