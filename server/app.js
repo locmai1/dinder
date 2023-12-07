@@ -133,6 +133,287 @@ app.get("/users/profile", authenticate, (req, res) => {
 
 /******************************* EVENT ROUTES ********************************/
 
+app.post("/events/add", authenticate, async (req, res) => {
+  try {
+    const { mealType, dateTime, location, meetingLocation, type, purpose } =
+      req.body;
+    const user = req.user;
+
+    const newEvent = new Event({
+      mealType,
+      dateTime,
+      location,
+      meetingLocation,
+      type,
+      purpose,
+      host: user,
+      approvedUsers: [user],
+      pendingUsers: [],
+    });
+
+    await newEvent.save();
+
+    user.events.push(newEvent._id);
+
+    await user.save();
+
+    res
+      .status(201)
+      .json({ message: "Event added successfully.", newEvent, user });
+  } catch (err) {
+    console.error("Error adding event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/events", authenticate, async (req, res) => {
+  try {
+    const events = await Event.find();
+
+    res.json({ events });
+  } catch (err) {
+    console.error("Error fetching events:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/events/host", authenticate, async (req, res) => {
+  try {
+    const hostUserId = req.user._id;
+
+    const hostedEvents = await Event.find({ host: hostUserId });
+
+    res.json({ hostedEvents });
+  } catch (err) {
+    console.error("Error fetching hosted events:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.patch("/events/edit/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const { mealType, dateTime, location, meetingLocation, type, purpose } =
+      req.body;
+    const user = req.user;
+
+    const event = await Event.findById(eventId);
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    if (event.host.toString() !== user._id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You are not the host of this event." });
+    }
+
+    event.mealType = mealType || event.mealType;
+    event.dateTime = dateTime || event.dateTime;
+    event.location = location || event.location;
+    event.meetingLocation = meetingLocation || event.meetingLocation;
+    event.type = type || event.type;
+    event.purpose = purpose || event.purpose;
+
+    await event.save();
+
+    res.json({ message: "Event information updated successfully.", event });
+  } catch (err) {
+    console.error("Error editing event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/events/approve/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    const { userEmail } = req.body;
+    const user = req.user;
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    const userToApprove = await User.findOne({ email: userEmail });
+
+    if (!userToApprove) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    if (event.host.toString() !== user._id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You are not the host of this event." });
+    }
+
+    event.pendingUsers = event.pendingUsers.filter(
+      (pendingUserId) =>
+        pendingUserId.toString() !== userToApprove._id.toString()
+    );
+    event.approvedUsers.push(userToApprove._id);
+
+    await event.save();
+
+    userToApprove.events.push(eventId);
+
+    await userToApprove.save();
+
+    res.json({
+      message: "User approved for event successfully.",
+      event,
+      userToApprove,
+    });
+  } catch (err) {
+    console.error("Error approving user for event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/events/request/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const user = req.user;
+    const event = await Event.findById(eventId);
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    event.pendingUsers.push(user._id);
+
+    await event.save();
+
+    res.json({ message: "User requested to join event successfully.", event });
+  } catch (err) {
+    console.error("Error requesting to join event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/events/remove/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    const { userEmail } = req.body;
+    const user = req.user;
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    if (event.host.toString() !== user._id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You are not the host of this event." });
+    }
+
+    const userToRemove = await User.findOne({ email: userEmail });
+
+    if (!userToRemove) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    event.approvedUsers = event.approvedUsers.filter(
+      (approvedUserId) =>
+        approvedUserId.toString() !== userToRemove._id.toString()
+    );
+
+    await event.save();
+
+    userToRemove.events = userToRemove.events.filter(
+      (userEventId) => userEventId.toString() !== eventId.toString()
+    );
+
+    await userToRemove.save();
+
+    res.json({
+      message: "User removed from approved users for event successfully.",
+      event,
+      userToRemove,
+    });
+  } catch (err) {
+    console.error("Error removing user from approved users for event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/events/deny/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    const { userEmail } = req.body;
+    const user = req.user;
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    if (event.host.toString() !== user._id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You are not the host of this event." });
+    }
+
+    const userToRemove = await User.findOne({ email: userEmail });
+
+    if (!userToRemove) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    event.pendingUsers = event.pendingUsers.filter(
+      (pendingUserId) =>
+        pendingUserId.toString() !== userToRemove._id.toString()
+    );
+
+    await event.save();
+
+    res.json({
+      message: "User's request denied for event successfully.",
+      event,
+    });
+  } catch (err) {
+    console.error("Error denying user's request for event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.delete("/events/:id", authenticate, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    const user = req.user;
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found." });
+    }
+
+    if (event.host.toString() !== user._id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You are not the host of this event." });
+    }
+
+    const usersWithEvent = await User.find({ events: eventId });
+
+    for (const userToUpdate of usersWithEvent) {
+      userToUpdate.events = userToUpdate.events.filter(
+        (userEventId) => userEventId.toString() !== eventId.toString()
+      );
+
+      await userToUpdate.save();
+    }
+
+    await Event.findByIdAndDelete(eventId);
+
+    res.json({ message: "Event deleted successfully." });
+  } catch (err) {
+    console.error("Error deleting event:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 /******************************** BASE ROUTE *********************************/
 
 app.get("/", (req, res) => {

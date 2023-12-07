@@ -30,7 +30,17 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
-  users: [
+  host: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  approvedUsers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
+  pendingUsers: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
