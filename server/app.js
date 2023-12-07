@@ -52,7 +52,7 @@ const authenticate = passport.authenticate("jwt", { session: false });
 
 /******************************** USER ROUTES ********************************/
 
-app.post("/register", async (req, res) => {
+app.post("/users/register", async (req, res) => {
   try {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -69,11 +69,11 @@ app.post("/register", async (req, res) => {
     });
     res.status(201).json({ message: "User registered successfully.", token });
   } catch (err) {
-    res.status(500).json({ error: "Internal Server Error", message: err });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -102,7 +102,32 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/user", authenticate, (req, res) => {
+app.patch("/users/edit", authenticate, async (req, res) => {
+  try {
+    const {
+      name,
+      class: classYear,
+      pronouns,
+      restrictions,
+      interests,
+    } = req.body;
+    const user = req.user;
+
+    user.name = name;
+    user.class = classYear;
+    user.pronouns = pronouns;
+    user.restrictions = restrictions;
+    user.interests = interests;
+
+    await user.save();
+
+    res.json({ message: "User information updated successfully.", user });
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/users/profile", authenticate, (req, res) => {
   res.json({ user: req.user });
 });
 
