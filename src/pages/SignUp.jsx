@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./SignUp.css";
+import "../styles/SignUp.css";
 
 export default function SignUp() {
   const years = [2024, 2025, 2026, 2027];
