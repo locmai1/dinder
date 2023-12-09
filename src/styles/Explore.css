@@ -31,7 +31,7 @@
 
 .event {
   display: flex;
-  width: 353px;
+  width: 29.5%;
   padding: 16px;
   flex-direction: column;
   align-items: flex-start;
@@ -42,12 +42,18 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.event-head {
+.event-head-explore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.event-title-hours {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  gap: 10px;
 }
 
 .event-title {
@@ -59,17 +65,18 @@
 .event-hours-ago {
   color: #8b949e;
   text-align: right;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
 }
 
 .event-content {
   font-weight: 700;
+  text-wrap: nowrap;
 }
 
 .request-button {
   display: flex;
-  padding: 6px 16px;
+  padding-block: 6px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -78,6 +85,34 @@
   background: #ffd233;
   font-size: 12px;
   font-weight: 500;
+  color: black;
+}
+
+.format {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 6%;
+  grid-row-gap: 6%;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.meeting-location {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .ModalBackground {
@@ -104,4 +139,94 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+@media (max-width: 1336px) {
+  .format {
+    display: flex;
+  }
+
+  .event {
+    width: 40%;
+  }
+}
+
+@media (max-width: 1035px) {
+  .format {
+    display: flex;
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr;
+    grid-row-gap: 1%;
+  }
+
+  .event-head-explore {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .meeting-location {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 375px) {
+  .Explore {
+    padding-inline: 56px;
+  }
+  .sub-heading {
+    font-size: 16px;
+  }
+
+  .filter {
+    width: auto;
+  }
+
+  .format {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .event-head-explore {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .event {
+    width: 100%;
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+  }
+
+  .bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .event-title {
+    font-size: 10px;
+  }
+
+  .event-title-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+
+  .meeting-location {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 }

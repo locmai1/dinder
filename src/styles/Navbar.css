@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 128px;
+  padding: 12px 86px;
   background-color: black;
   color: white;
 }
@@ -19,6 +19,10 @@
   display: flex;
 }
 
+.nav-links-mobile {
+  display: none;
+}
+
 .nav-links li {
   margin-left: 16px;
 }
@@ -27,4 +31,51 @@
   text-decoration: none;
   color: white;
   font-weight: 700;
+}
+
+.MenuToggle {
+  display: none;
+  background-color: black;
+  margin-top: 4px;
+}
+
+/* For mobile view */
+@media (max-width: 375px) {
+  .navbar {
+    padding-inline: 56px;
+  }
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links-mobile {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    display: block;
+    text-align: center;
+    padding-bottom: 8px;
+  }
+
+  .nav-links li {
+    margin-left: 0px;
+  }
+
+  .MenuToggle {
+    display: block;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+  }
+
+  ul {
+    padding-inline-start: 0px;
+  }
 }
