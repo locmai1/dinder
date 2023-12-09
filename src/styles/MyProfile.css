@@ -1,137 +1,137 @@
 h1 {
-    font-size: 36px;
-    font-weight: 700;
+  font-size: 36px;
+  font-weight: 700;
 }
 
 .MainContainer {
-    margin: auto;
-    margin-top: 66px;
-    width: 85%;
+  margin: auto;
+  margin-top: 66px;
+  width: 85%;
 }
 
 .PicNameContainer {
-    display: flex;
-    align-items: center;
-    height: 130px;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  height: 130px;
+  justify-content: space-between;
 }
 
 .PicName {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .Pic {
-    height: 130px;
-    width: 130px;
-    background-color: #D99BFF;
-    border-radius: 100%;
-    align-items: end;
-    justify-content: right;
-    display: flex;
+  height: 130px;
+  width: 130px;
+  background-color: #d99bff;
+  border-radius: 100%;
+  align-items: end;
+  justify-content: right;
+  display: flex;
 }
 
 .PicEdit {
-    border-radius: 100%;
-    background-color: #58A7FE;
-    height: 33px;
-    width: 33px;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border-radius: 100%;
+  background-color: #58a7fe;
+  height: 33px;
+  width: 33px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Name {
-    margin-left: 28px;
+  margin-left: 28px;
 }
 
 .Username {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .Email {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 400;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .Icon {
-    background-color: rgb(81, 140, 192);
+  background-color: rgb(81, 140, 192);
 }
 
 .EditButton {
-    align-items: center;
-    font-family: Poppins;
-    color: white;
-    background-color: black;
-    border-radius: 10px;
-    width: 80px;
-    height: 35px;
-    font-size: 20px;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+  align-items: center;
+  font-family: Poppins;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  width: 80px;
+  height: 35px;
+  font-size: 20px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .InfoContainer {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin: 22px;
-    font-size: 16px;
-    font-weight: 700;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 22px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .Collection {
-    display: grid;
+  display: grid;
 }
 
 .Collection p {
-    height: 25px;
+  height: 25px;
 }
 
 p {
-    margin-top: 15px;
-    margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .Item {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .Item p {
-    width: 220px;
+  width: 220px;
 }
 
 .BottomSection {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .PremiumContainer {
-    width: 100%;
-    margin: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  margin: 20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .Premium {
-    border: none;
-    width: 180px;
-    height: 36px;
-    border-radius: 20px;
-    background-color: #58A7FE;
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
+  border: none;
+  width: 180px;
+  height: 36px;
+  border-radius: 20px;
+  background-color: #58a7fe;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
