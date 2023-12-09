@@ -83,7 +83,7 @@
 .event-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-column-gap: 10%;
+	grid-column-gap: 6%;
 	grid-row-gap: 6%;
 }
 
@@ -105,6 +105,12 @@
 	display: flex;
 	flex-direction: row;
 	gap: 12px;
+}
+
+.meeting-location {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
 }
 
 .accept-button {
@@ -166,6 +172,12 @@
 		display: flex;
 		flex-direction: column;
 	}
+
+	.meeting-location {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
 }
 
 @media (max-width: 375px) {
@@ -220,5 +232,11 @@
 	.accept-decline-bar {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.meeting-location {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
 	}
 }

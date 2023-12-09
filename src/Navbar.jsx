@@ -17,32 +17,32 @@ export default function Navbar() {
 			</button>
 			<ul className="nav-links">
 				<li>
-					<a href="/Explore">Explore</a>
+					<a href="/">Explore</a>
 				</li>
 				<li>
-					<a href="/Hosting">Hosting</a>
+					<a href="/hosting">Hosting</a>
 				</li>
 				<li>
-					<a href="/Pending">Joining</a>
+					<a href="/joining">Joining</a>
 				</li>
 				<li>
-					<a href="/Profile">Profile</a>
+					<a href="/profile">Profile</a>
 				</li>
 			</ul>
 			<ul
 				className="nav-links nav-links-mobile"
 				style={{ display: expandNavbar ? "flex" : "none" }}>
 				<li>
-					<a href="/Explore">Explore</a>
+					<a href="/">Explore</a>
 				</li>
 				<li>
-					<a href="/Hosting">Hosting</a>
+					<a href="/hosting">Hosting</a>
 				</li>
 				<li>
-					<a href="/Pending">Joining</a>
+					<a href="/joining">Joining</a>
 				</li>
 				<li>
-					<a href="/Profile">Profile</a>
+					<a href="/profile">Profile</a>
 				</li>
 			</ul>
 		</nav>

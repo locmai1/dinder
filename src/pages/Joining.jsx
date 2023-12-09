@@ -1,5 +1,5 @@
-import "./styles/Joining.css";
-import Navbar from "./Navbar";
+import "../styles/Joining.css";
+import Navbar from "../Navbar";
 
 export default function Joining() {
 	return (
@@ -30,6 +30,11 @@ export default function Joining() {
 							<div className="event-content">Advice</div>
 						</div>
 
+						<div className="meeting-location">
+							<div>Meeting Location</div>
+							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
+						</div>
+
 						<div className="chat-button">
 							<img src="img/chat.svg"></img>
 							<div>Chat</div>
@@ -54,6 +59,11 @@ export default function Joining() {
 							<div className="event-content">Carm</div>
 							<div>Purpose</div>
 							<div className="event-content">Advice</div>
+						</div>
+
+						<div className="meeting-location">
+							<div>Meeting Location</div>
+							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
 						</div>
 
 						<div className="chat-button">
@@ -83,6 +93,11 @@ export default function Joining() {
 						<div className="event-content">Carm</div>
 						<div>Purpose</div>
 						<div className="event-content">Advice</div>
+					</div>
+
+					<div className="meeting-location">
+						<div>Meeting Location</div>
+						<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
 					</div>
 
 					<div className="cancel-button">Cancel Request</div>

@@ -1,5 +1,5 @@
-import "./styles/Hosting.css";
-import Navbar from "./Navbar";
+import "../styles/Hosting.css";
+import Navbar from "../Navbar";
 
 export default function Hosting() {
 	return (
@@ -39,6 +39,11 @@ export default function Hosting() {
 							<div className="event-content">Carm</div>
 							<div>Purpose</div>
 							<div className="event-content">Advice</div>
+						</div>
+
+						<div className="meeting-location">
+							<div>Meeting Location</div>
+							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
 						</div>
 					</div>
 					<div className="request-join">
