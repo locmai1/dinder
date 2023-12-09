@@ -1,12 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
 import Navbar from "./Navbar";
 import "./styles/MyProfile.css"
 import "./SignUp.css"
 
-function App() {
+
+export default function MyProfile() {
 	return (
-		<div className="App">
+		<div>
 			<Navbar />
 			<div className="MainContainer">
 				<div className="ProfileText">
@@ -92,5 +91,3 @@ function App() {
 		</div>
 	);
 }
-
-export default App;
