@@ -55,30 +55,41 @@ export default function MyProfile() {
         </div>
         <div className="InfoContainer">
           <div className="Collection">
-            <div className="Item">
-              <p>Pronouns</p>
+            <div className="Item">Pronouns</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="MyProfileYellowContainer">He/him</div>
             </div>
-            <div className="Item">
-              <p>Allergens/Restrictions</p>
+            <div className="Item">Allergens/Restrictions</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="MyProfileYellowContainer">Gluten-Free</div>
             </div>
-            <div className="Item">
-              <p>Interests</p>
+            <div className="Item">Interests</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
+              <div className="MyProfileYellowContainer">Movies</div>
+              <div className="MyProfileYellowContainer">Sports</div>
             </div>
-            <div className="Item">
-              <p>Year</p>
+            <div className="Item">Year</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="MyProfileYellowContainer">2025</div>
             </div>
-          </div>
-          <div className="Collection">
-            <div className="Item">
-              <p>Meal Swip Balance</p>
-            </div>
-            <div className="Item">
-              <div>
-                <p>Guest Meal Swipes Left</p>
-              </div>
-            </div>
-            <p></p>
-            <p></p>
+            <div className="Item">Meal Swip Balance</div>
+            <div className="MyProfileGrayContainer">165</div>
+            <div className="Item">Guest Meal Swipes Left</div>
+            <div className="MyProfileGrayContainer">13</div>
           </div>
         </div>
         <div className="BottomSection">
