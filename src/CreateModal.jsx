@@ -24,7 +24,7 @@ export default function CreateModal({ setCreateModalOpen }) {
   const [purposeIndex, setPurposeIndex] = useState(-1);
 
   const [locationAddress, setLocationAddress] = useState("");
-  const [meetingLocation, setMeetingLocation] = useState();
+  const [meetingLocation, setMeetingLocation] = useState("");
 
   const onCreateClick = () => {
     // @TODO: Create a new event here
@@ -32,19 +32,15 @@ export default function CreateModal({ setCreateModalOpen }) {
       mealIndex === -1 ||
       locationIndex === -1 ||
       typeIndex === -1 ||
-      purposeIndex === -1
+      purposeIndex === -1 ||
+      meetingLocation === ""
     ) {
       alert("Please finish selecting all the features for your new dinder");
     } else {
       console.log("Meal: ", meals[mealIndex]);
       console.log("Date: ", date);
       console.log("Location: ", locations[locationIndex]);
-      console.log(
-        "Meeting Location: Lat - " +
-          meetingLocation.latitude +
-          " Lng - " +
-          meetingLocation.longitude
-      );
+      console.log("Meeting Location: ", meetingLocation);
       console.log("Dinder Type: ", types[typeIndex]);
       console.log("Purpose: ", purposes[purposeIndex]);
     }
@@ -54,10 +50,11 @@ export default function CreateModal({ setCreateModalOpen }) {
     setLocationAddress(address);
     geocodeByAddress(address)
       .then(async (results) => {
-        setMeetingLocation({
-          latitude: results[0].geometry.location.lat(),
-          longitude: results[0].geometry.location.lng(),
-        });
+        setMeetingLocation(results[0].formatted_address);
+        // setMeetingLocation({
+        //   latitude: results[0].geometry.location.lat(),
+        //   longitude: results[0].geometry.location.lng(),
+        // });
         // const description = await getDescriptionFromPlaceId(
         //   results[0].place_id
         // );
@@ -192,36 +189,21 @@ export default function CreateModal({ setCreateModalOpen }) {
               loading,
             }) => (
               <div>
-                <div
-                  className="AlignedRowSpaced"
+                <input
                   style={{
+                    backgroundColor: "white",
+                    border: "1px solid #B9B9B9",
+                    width: "100%",
+                    fontSize: 16,
                     cursor: "text",
-                    padding: 10,
-                    borderRadius: 5,
-                    border: "0.5px solid #B9B9B9",
-                    gap: 5,
+                    color: "black",
+                    boxShadow: "none",
                   }}
-                >
-                  <input
-                    style={{
-                      backgroundColor: "white",
-                      border: 0,
-                      width: "100%",
-                      fontSize: 16,
-                      cursor: "text",
-                      color: "black",
-                    }}
-                    {...getInputProps({
-                      placeholder: "Choose Location",
-                      className: "location-search-input",
-                    })}
-                  />
-                  {/* {suggestions.length > 0 ? (
-                    <IoIosArrowUp size={16} color={Colors.GRAY2} />
-                  ) : (
-                    <IoIosArrowDown size={16} color={Colors.GRAY2} />
-                  )} */}
-                </div>
+                  {...getInputProps({
+                    placeholder: "Choose Location",
+                    className: "location-search-input",
+                  })}
+                />
                 <div
                   style={{
                     width: "25%",
@@ -229,7 +211,6 @@ export default function CreateModal({ setCreateModalOpen }) {
                     zIndex: 99,
                     border: suggestions.length > 0 ? "0.5px solid #B9B9B9" : "",
                     borderRadius: 5,
-                    marginTop: 5,
                     backgroundColor: "white",
                   }}
                   className="autocomplete-dropdown-container"
@@ -255,6 +236,7 @@ export default function CreateModal({ setCreateModalOpen }) {
                       : { backgroundColor: "#ffffff", cursor: "pointer" };
                     return (
                       <div
+                        key={index}
                         {...getSuggestionItemProps(suggestion, {
                           className,
                           style,
