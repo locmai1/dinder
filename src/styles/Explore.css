@@ -95,6 +95,8 @@
 
 .ModalContent {
   width: 24vw;
+  height: 80vh;
+  overflow-y: scroll;
   background-color: white;
   padding: 24px;
   border-radius: 8px;

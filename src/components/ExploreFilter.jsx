@@ -193,6 +193,7 @@ export default function ExploreFilter({
             style={{
               paddingBlock: 12,
               borderRadius: 10,
+              fontWeight: "700",
               backgroundColor: "#333",
               color: "white",
               textAlign: "center",
