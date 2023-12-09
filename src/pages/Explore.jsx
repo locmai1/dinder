@@ -1,7 +1,22 @@
 import "../styles/Explore.css";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
+import ExploreFilter from "../components/ExploreFilter";
 
 export default function Explore() {
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const meals = ["Breakfast", "Lunch", "Dinner"];
+  const locations = ["Carm", "Dewick", "Hodgdon"];
+  const years = ["2024", "2025", "2026", "2027", "Grad"];
+  const purposes = ["Chat", "Advice", "Other"];
+
+  const [mealIndexes, setMealIndexes] = useState([]);
+  const [date, setDate] = useState();
+  const [locationIndexes, setLocationIndexes] = useState([]);
+  const [yearIndexes, setYearIndexes] = useState([]);
+  const [purposeIndexes, setPurposeIndexes] = useState([]);
+
   return (
     <div>
       <Navbar />
@@ -9,7 +24,7 @@ export default function Explore() {
         <div className="heading">Explore</div>
         <div className="bar">
           <div className="sub-heading">Based on your preferences...</div>
-          <div className="filter">
+          <div className="filter" onClick={() => setFilterOpen(true)}>
             <div>Filter</div>
             <img src="img/filter.svg" alt="Filter" />
           </div>
@@ -110,6 +125,25 @@ export default function Explore() {
           </div>
         </div>
       </div>
+      {filterOpen ? (
+        <ExploreFilter
+          meals={meals}
+          locations={locations}
+          years={years}
+          purposes={purposes}
+          mealIndexes={mealIndexes}
+          date={date}
+          locationIndexes={locationIndexes}
+          yearIndexes={yearIndexes}
+          purposeIndexes={purposeIndexes}
+          setMealIndexes={setMealIndexes}
+          setDate={setDate}
+          setLocationIndexes={setLocationIndexes}
+          setYearIndexes={setYearIndexes}
+          setPurposeIndexes={setPurposeIndexes}
+          setFilterOpen={setFilterOpen}
+        />
+      ) : null}
     </div>
   );
 }

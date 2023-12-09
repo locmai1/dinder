@@ -1,7 +1,12 @@
 import "../styles/Hosting.css";
 import Navbar from "../components/Navbar";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+import CreateModal from "../components/CreateModal";
 
 export default function Hosting() {
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
   return (
     <div>
       <Navbar />
@@ -15,9 +20,9 @@ export default function Hosting() {
           }}
         >
           <div className="sub-heading">My upcoming dinders</div>
-          <div className="create">
+          <div className="create" onClick={() => setCreateModalOpen(true)}>
             <div>Create</div>
-            <img src="img/plus-white.svg" alt="Plus-White" />
+            <Icon icon={"ic:round-plus"} height={18} />
           </div>
         </div>
 
@@ -56,6 +61,9 @@ export default function Hosting() {
           </div>
         </div>
       </div>
+      {createModalOpen ? (
+        <CreateModal setCreateModalOpen={setCreateModalOpen} />
+      ) : null}
     </div>
   );
 }

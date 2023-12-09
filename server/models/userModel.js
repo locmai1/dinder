@@ -13,26 +13,27 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
+    default: "",
   },
   class: {
     type: String,
-    required: true,
+    default: "",
   },
   pronouns: {
     type: [String],
     default: [],
-    required: true,
   },
   restrictions: {
     type: [String],
     default: [],
-    required: true,
   },
   interests: {
     type: [String],
     default: [],
-    required: true,
+  },
+  premium: {
+    type: Boolean,
+    default: false,
   },
   events: [
     {
