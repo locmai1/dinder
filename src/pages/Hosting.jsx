@@ -1,8 +1,8 @@
-import "./styles/Hosting.css";
-import Navbar from "./Navbar";
+import "../styles/Hosting.css";
+import Navbar from "../components/Navbar";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import CreateModal from "./CreateModal";
+import CreateModal from "../components/CreateModal";
 
 export default function Hosting() {
   const [createModalOpen, setCreateModalOpen] = useState(false);

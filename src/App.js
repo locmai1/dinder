@@ -1,10 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import Explore from "./Explore";
-import Hosting from "./Hosting";
-import Joining from "./Joining";
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Explore from "./pages/Explore";
+import Hosting from "./pages/Hosting";
+import Joining from "./pages/Joining";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (

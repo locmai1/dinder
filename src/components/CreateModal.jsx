@@ -51,20 +51,6 @@ export default function CreateModal({ setCreateModalOpen }) {
     geocodeByAddress(address)
       .then(async (results) => {
         setMeetingLocation(results[0].formatted_address);
-        // setMeetingLocation({
-        //   latitude: results[0].geometry.location.lat(),
-        //   longitude: results[0].geometry.location.lng(),
-        // });
-        // const description = await getDescriptionFromPlaceId(
-        //   results[0].place_id
-        // );
-        // setLocationSettings({
-        //   googleDescription: description,
-        //   googlePlaceId: results[0].place_id,
-        //   formattedAddress: results[0].formatted_address,
-        //   latitude: results[0].geometry.location.lat(),
-        //   longitude: results[0].geometry.location.lng(),
-        // });
       })
       .catch((error) => {
         console.error("Error", error);
