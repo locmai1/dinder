@@ -26,7 +26,7 @@ export default function CreateModal({ setCreateModalOpen }) {
   const [locationAddress, setLocationAddress] = useState("");
   const [meetingLocation, setMeetingLocation] = useState("");
 
-  const onCreateClick = () => {
+  const onCreateClick = async () => {
     // @TODO: Create a new event here
     if (
       mealIndex === -1 ||
@@ -43,6 +43,34 @@ export default function CreateModal({ setCreateModalOpen }) {
       console.log("Meeting Location: ", meetingLocation);
       console.log("Dinder Type: ", types[typeIndex]);
       console.log("Purpose: ", purposes[purposeIndex]);
+
+      const event = {
+        mealType: meals[mealIndex],
+        dateTime: date,
+        location: locations[locationIndex],
+        meetingLocation: meetingLocation,
+        type: types[typeIndex],
+        purpose: purposes[purposeIndex],
+      };
+
+      // try {
+      //   const response = await fetch("http://localhost:3001/events/add", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(event),
+      //   });
+
+      //   if (!response.ok) {
+      //     throw new Error("Failed to create event");
+      //   }
+
+      //   const data = await response.json();
+      //   console.log("Event created:", data.newEvent);
+      // } catch (error) {
+      //   console.error("Error creating event:", error);
+      // }
     }
   };
 
