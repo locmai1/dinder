@@ -6,9 +6,9 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">
+      <a className="logo" href="/">
         din<span style={{ color: "#FFD233" }}>der</span>
-      </div>
+      </a>
       <button
         id="menu-toggle"
         className="MenuToggle"
