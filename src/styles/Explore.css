@@ -88,6 +88,21 @@
   color: black;
 }
 
+.pending-button {
+  display: flex;
+  padding-block: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 10px;
+  border: 1px solid #EB5757;
+  background: white;
+  font-size: 12px;
+  font-weight: 500;
+  color: #EB5757;
+}
+
 .format {
   display: flex;
   flex-direction: row;
