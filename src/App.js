@@ -6,6 +6,7 @@ import Joining from "./pages/Joining";
 import MyProfile from "./pages/MyProfile";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Onboarding from "./pages/Onboarding";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/onboarding" element={<Onboarding />} />
       </Routes>
     </div>
   );
