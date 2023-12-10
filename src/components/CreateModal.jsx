@@ -10,6 +10,8 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 
 export default function CreateModal({ setCreateModalOpen }) {
+  const baseURL = "http://localhost:3001";
+
   const meals = ["Breakfast", "Lunch", "Dinner"];
   const locations = ["Carm", "Dewick", "Hodgdon"];
   const types = ["1 on 1", "Group of 3", "Group of 4"];
@@ -17,7 +19,7 @@ export default function CreateModal({ setCreateModalOpen }) {
 
   const [mealIndex, setMealIndex] = useState(-1);
   const [date, setDate] = useState(
-    new Date(Math.round(new Date().getTime() / 60000) * 60000).toISOString()
+    new Date(Math.round(new Date().getTime() / 60000) * 60000)
   );
   const [locationIndex, setLocationIndex] = useState(-1);
   const [typeIndex, setTypeIndex] = useState(-1);
@@ -26,8 +28,7 @@ export default function CreateModal({ setCreateModalOpen }) {
   const [locationAddress, setLocationAddress] = useState("");
   const [meetingLocation, setMeetingLocation] = useState("");
 
-  const onCreateClick = () => {
-    // @TODO: Create a new event here
+  const onCreateClick = async () => {
     if (
       mealIndex === -1 ||
       locationIndex === -1 ||
@@ -37,12 +38,36 @@ export default function CreateModal({ setCreateModalOpen }) {
     ) {
       alert("Please finish selecting all the features for your new dinder");
     } else {
-      console.log("Meal: ", meals[mealIndex]);
-      console.log("Date: ", date);
-      console.log("Location: ", locations[locationIndex]);
-      console.log("Meeting Location: ", meetingLocation);
-      console.log("Dinder Type: ", types[typeIndex]);
-      console.log("Purpose: ", purposes[purposeIndex]);
+      const event = {
+        mealType: meals[mealIndex],
+        dateTime: date,
+        location: locations[locationIndex],
+        meetingLocation: meetingLocation,
+        type: types[typeIndex],
+        purpose: purposes[purposeIndex],
+      };
+
+      try {
+        const response = await fetch(baseURL + "/events/add", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(event),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data.message);
+
+          setCreateModalOpen(false);
+        } else {
+          console.error("Error adding dinder:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error adding dinder:", error.message);
+      }
     }
   };
 
@@ -109,10 +134,10 @@ export default function CreateModal({ setCreateModalOpen }) {
                 },
               }}
               disablePast
-              value={dayjs(new Date(new Date(date).getTime()))}
+              value={dayjs(new Date(date.getTime()))}
               onChange={(newValue) => {
                 const date = dayjs(newValue).toDate();
-                setDate(date.toISOString());
+                setDate(date);
               }}
             />
             <TimePicker
@@ -135,10 +160,10 @@ export default function CreateModal({ setCreateModalOpen }) {
                   },
                 },
               }}
-              value={dayjs(new Date(new Date(date).getTime()))}
+              value={dayjs(new Date(date.getTime()))}
               onChange={(newValue) => {
                 const date = dayjs(newValue).toDate();
-                setDate(date.toISOString());
+                setDate(date);
               }}
             />
           </div>
