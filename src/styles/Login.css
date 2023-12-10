@@ -9,6 +9,7 @@
   flex-direction: column;
   gap: 14px;
   width: 460px;
+  padding: 100px 0px 0px 0px;
 }
 
 .LoginInput {
