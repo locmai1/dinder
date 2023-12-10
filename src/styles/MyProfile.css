@@ -108,7 +108,7 @@ h1 {
 .Item {
   display: flex;
   flex-direction: row;
-  padding-right: 10px;
+  margin-right: 10px;
 }
 
 .Item p {
@@ -203,5 +203,23 @@ h1 {
     flex-direction: row;
     gap: 5px;
     margin-top: 5px;
+  }
+
+  .Collection {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+  }
+
+  .Item {
+    margin-top: 10px;
+  }
+
+  .PicNameContainer {
+    display: flex;
+    align-items: center;
+    height: 130px;
+    justify-content: space-between;
+    margin-bottom: 5px;
   }
 }
