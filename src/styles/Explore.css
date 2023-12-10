@@ -232,7 +232,7 @@
 		width: auto;
 	}
 
-	.format {
+	.format-explore {
 		display: flex;
 		flex-direction: column;
 		gap: 25px;

@@ -49,7 +49,9 @@ export default function Joining() {
       <Navbar />
       <div className="Joining">
         <div className="heading">Joining</div>
-        <div className="sub-heading">Confirmed dinders</div>
+        <div className="sub-heading" style={{ marginBottom: 56 }}>
+          Confirmed dinders
+        </div>
 
         <div className="format-joining">
           {joinedEvents.map((event, index) => (
@@ -90,7 +92,12 @@ export default function Joining() {
           ))}
         </div>
 
-        <div className="sub-heading">Pending Requests</div>
+        <div
+          className="sub-heading"
+          style={{ marginBottom: 56, marginTop: 28 }}
+        >
+          Pending Requests
+        </div>
 
         <div className="format-joining">
           {pendingEvents.map((event, index) => (
