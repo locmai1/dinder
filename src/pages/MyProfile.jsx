@@ -1,8 +1,36 @@
 import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
 import "../styles/MyProfile.css";
 import "../styles/SignUp.css";
 
 export default function MyProfile() {
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/users/profile", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data.user);
+        } else {
+          console.error("Error fetching profile data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching profile data:", error.message);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -31,8 +59,8 @@ export default function MyProfile() {
               </button>
             </div>
             <div className="Name">
-              <p className="Username">Our Fake Ass Homie</p>
-              <p className="Email">FakeHomie@gmail.com</p>
+              <p className="Username">{profileData && profileData.name}</p>
+              <p className="Email">{profileData && profileData.email}</p>
             </div>
           </div>
           <button className="EditButton">
@@ -53,6 +81,7 @@ export default function MyProfile() {
             </svg>
           </button>
         </div>
+        {/* TOOD: map through and display information */}
         <div className="InfoContainer">
           <div className="Collection">
             <div className="Item">Pronouns</div>
