@@ -33,6 +33,16 @@
   font-weight: 700;
 }
 
+.logout-button {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
+
 .MenuToggle {
   display: none;
   background-color: black;

@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
   const [expandNavbar, setExpandNavbar] = useState(false);
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="navbar">
@@ -29,6 +35,11 @@ export default function Navbar() {
         <li>
           <a href="/profile">Profile</a>
         </li>
+        <li>
+          <div className="logout-button" onClick={handleLogout}>
+            Logout
+          </div>
+        </li>
       </ul>
       <ul
         className="nav-links nav-links-mobile"
@@ -45,6 +56,11 @@ export default function Navbar() {
         </li>
         <li>
           <a href="/profile">Profile</a>
+        </li>
+        <li>
+          <div className="logout-button" onClick={handleLogout}>
+            Logout
+          </div>
         </li>
       </ul>
     </nav>
