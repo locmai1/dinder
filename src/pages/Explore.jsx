@@ -93,7 +93,7 @@ export default function Explore() {
             <div key={index} className="event">
               <div className="event-head-explore">
                 <div className="event-title-hours">
-                  <div className="event-title">{event.type}</div>
+                  <div className="event-title">{event.mealType}</div>
                   <div className="event-hours-ago">
                     {calculateHoursAgo(event.dateTime)} hrs ago
                   </div>
