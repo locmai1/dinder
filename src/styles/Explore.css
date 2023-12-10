@@ -112,6 +112,21 @@
 	gap: 56px;
 }
 
+.chat-button {
+	display: flex;
+	padding: 6px 16px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	align-self: stretch;
+	font-size: 12px;
+	font-weight: 500;
+	border-radius: 10px;
+	border: 1px solid #58a7fe;
+	background: #58a7fe;
+	color: white;
+}
+
 .event-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
