@@ -157,7 +157,7 @@ export default function Onboarding() {
           ))}
         </div>
       </div>
-      <button
+      <div
         className="OnboardingYellowButton"
         onClick={() => {
           // @TODO: Remove this and replace with route and save data to database
@@ -177,7 +177,7 @@ export default function Onboarding() {
         }}
       >
         Get started
-      </button>
+      </div>
     </div>
   );
 }
