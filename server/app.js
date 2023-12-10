@@ -178,18 +178,26 @@ app.get("/events", authenticate, async (req, res) => {
       return host ? host.name : "Unknown Host";
     });
 
-    const pendingStatusPromises = events.map(async (event) => {
+    const classPromises = events.map(async (event) => {
+      const host = await User.findOne({ _id: event.host });
+      return host ? host.class : "Unknown";
+    });
+
+    const userApprovedStatusPromises = events.map(async (event) => {
       const isUserPending = event.pendingUsers.includes(userId);
-      return isUserPending;
+      const isUserApproved = event.approvedUsers.includes(userId);
+      return { isUserPending, isUserApproved };
     });
 
     const hostNames = await Promise.all(hostPromises);
-    const pendingStatuses = await Promise.all(pendingStatusPromises);
+    const hostClasses = await Promise.all(classPromises);
+    const userStatuses = await Promise.all(userApprovedStatusPromises);
 
     const eventsWithDetails = events.map((event, index) => ({
       ...event.toObject(),
       hostName: hostNames[index],
-      isUserPending: pendingStatuses[index],
+      hostClass: hostClasses[index],
+      ...userStatuses[index],
     }));
 
     res.json({ events: eventsWithDetails });
@@ -208,6 +216,27 @@ app.get("/events/host", authenticate, async (req, res) => {
     res.json({ hostedEvents });
   } catch (err) {
     console.error("Error fetching hosted events:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/events/join", authenticate, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const pendingEvents = await Event.find({ pendingUsers: userId }).populate({
+      path: "host",
+      select: "name",
+    });
+
+    const joinedEvents = await Event.find({ approvedUsers: userId }).populate({
+      path: "host",
+      select: "name",
+    });
+
+    res.json({ pendingEvents, joinedEvents });
+  } catch (err) {
+    console.error("Error fetching joined events:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

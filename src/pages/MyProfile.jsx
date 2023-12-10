@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import "../styles/MyProfile.css";
-import "../styles/Onboarding.css";
 
 export default function MyProfile() {
   const [profileData, setProfileData] = useState(null);
@@ -36,7 +35,7 @@ export default function MyProfile() {
   return (
     <div>
       <Navbar />
-      <div className="MainContainer">
+      <div className="MainProfileContainer">
         <div className="ProfileText">
           <h1>My Profile</h1>
         </div>
@@ -109,23 +108,27 @@ export default function MyProfile() {
             </div>
             <div className="Item">Allergens/Restrictions</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {profileData && profileData.restrictions.map((restriction, index) => (
-                <div key={index} className="MyProfileYellowContainer">
-                  {restriction}
-                </div>
-              ))}
+              {profileData &&
+                profileData.restrictions.map((restriction, index) => (
+                  <div key={index} className="MyProfileYellowContainer">
+                    {restriction}
+                  </div>
+                ))}
             </div>
             <div className="Item">Interests</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {profileData && profileData.interests.map((interest, index) => (
-                <div key={index} className="MyProfileYellowContainer">
-                  {interest}
-                </div>
-              ))}
+              {profileData &&
+                profileData.interests.map((interest, index) => (
+                  <div key={index} className="MyProfileYellowContainer">
+                    {interest}
+                  </div>
+                ))}
             </div>
             <div className="Item">Year</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <div className="MyProfileYellowContainer">{profileData && profileData.class}</div>
+              <div className="MyProfileYellowContainer">
+                {profileData && profileData.class}
+              </div>
             </div>
             <div className="Item">Meal Swip Balance</div>
             <div className="MyProfileGrayContainer">165</div>

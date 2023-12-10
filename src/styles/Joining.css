@@ -100,8 +100,15 @@
 	color: #eb5757;
 }
 
+.format-joining {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 56px;
+}
+
 @media (max-width: 1336px) {
-	.format {
+	.format-joining {
 		display: flex;
 	}
 
@@ -111,7 +118,7 @@
 }
 
 @media (max-width: 1035px) {
-	.format {
+	.format-joining {
 		display: flex;
 	}
 
@@ -133,8 +140,8 @@
 	}
 }
 
-@media (max-width: 375px) {
-	.Explore {
+@media (max-width: 430px) {
+	.Joining {
 		padding-inline: 56px;
 	}
 	.sub-heading {
@@ -145,7 +152,7 @@
 		width: auto;
 	}
 
-	.format {
+	.format-joining {
 		display: flex;
 		flex-direction: column;
 		gap: 25px;

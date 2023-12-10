@@ -1,6 +1,6 @@
 import "../styles/Explore.css";
 import Navbar from "../components/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ExploreFilter from "../components/ExploreFilter";
 
 export default function Explore() {
@@ -31,6 +31,47 @@ export default function Explore() {
     const options = { month: "short", day: "numeric" };
     return new Date(dateTime).toLocaleDateString("en-US", options);
   };
+
+  const filteredEvents = useMemo(() => {
+    let fEvents = events;
+
+    if (mealIndexes.length !== 0) {
+      let mealsPopulated = mealIndexes.map((index) => meals[index]);
+      fEvents = fEvents.filter((event) =>
+        mealsPopulated.includes(event.mealType)
+      );
+    }
+
+    if (date !== undefined) {
+      fEvents = fEvents.filter(
+        (event) => formatDate(event.dateTime) === formatDate(date.toISOString())
+      );
+    }
+
+    if (locationIndexes.length !== 0) {
+      let locationsPopulated = locationIndexes.map((index) => locations[index]);
+      fEvents = fEvents.filter((event) =>
+        locationsPopulated.includes(event.location)
+      );
+    }
+
+    if (yearIndexes.length !== 0) {
+      let yearsPopulated = yearIndexes.map((index) => years[index]);
+      fEvents = fEvents.filter((event) =>
+        yearsPopulated.includes(event.hostClass)
+      );
+    }
+
+    if (purposeIndexes.length !== 0) {
+      let purposesPopulated = purposeIndexes.map((index) => purposes[index]);
+      fEvents = fEvents.filter((event) =>
+        purposesPopulated.includes(event.purpose)
+      );
+    }
+
+    return fEvents;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, events, yearIndexes, locationIndexes, mealIndexes, purposeIndexes]);
 
   useEffect(() => {
     const fetchAllEvents = async () => {
@@ -88,12 +129,12 @@ export default function Explore() {
           </div>
         </div>
 
-        <div className="format">
+        <div className="format-explore">
           {events.map((event, index) => (
             <div key={index} className="event">
               <div className="event-head-explore">
                 <div className="event-title-hours">
-                  <div className="event-title">{event.type}</div>
+                  <div className="event-title">{event.mealType}</div>
                   <div className="event-hours-ago">
                     {calculateHoursAgo(event.dateTime)} hrs ago
                   </div>
@@ -122,6 +163,11 @@ export default function Explore() {
               {event.isUserPending ? (
                 <div className="pending-button" disabled>
                   <div>Pending</div>
+                </div>
+              ) : event.isUserApproved ? (
+                <div className="chat-button">
+                  <img src="img/chat.svg" alt="Chat" />
+                  <div>Chat</div>
                 </div>
               ) : (
                 <div
