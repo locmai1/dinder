@@ -104,7 +104,9 @@ export default function MyProfile() {
           <div className="Collection">
             <div className="Item">Pronouns</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <div className="MyProfileYellowContainer">He/him</div>
+              <div className="MyProfileYellowContainer">
+                {profileData && profileData.pronouns[0]}
+              </div>
             </div>
             <div className="Item">Allergens/Restrictions</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
