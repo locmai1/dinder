@@ -123,6 +123,11 @@ export default function Explore() {
                 <div className="pending-button" disabled>
                   <div>Pending</div>
                 </div>
+              ) : event.isUserApproved ? (
+                <div className="chat-button">
+                  <img src="img/chat.svg" alt="Chat" />
+                  <div>Chat</div>
+                </div>
               ) : (
                 <div
                   className="request-button"

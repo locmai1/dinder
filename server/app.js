@@ -171,25 +171,33 @@ app.post("/events/add", authenticate, async (req, res) => {
 app.get("/events", authenticate, async (req, res) => {
   try {
     const userId = req.user._id;
-    const events = await Event.find({ host: { $ne: userId } });
+    const events = await Event.find();
 
     const hostPromises = events.map(async (event) => {
       const host = await User.findOne({ _id: event.host });
       return host ? host.name : "Unknown Host";
     });
 
-    const pendingStatusPromises = events.map(async (event) => {
+    const classPromises = events.map(async (event) => {
+      const host = await User.findOne({ _id: event.host });
+      return host ? host.class : "Unknown";
+    });
+
+    const userApprovedStatusPromises = events.map(async (event) => {
       const isUserPending = event.pendingUsers.includes(userId);
-      return isUserPending;
+      const isUserApproved = event.approvedUsers.includes(userId);
+      return { isUserPending, isUserApproved };
     });
 
     const hostNames = await Promise.all(hostPromises);
-    const pendingStatuses = await Promise.all(pendingStatusPromises);
+    const hostClasses = await Promise.all(classPromises);
+    const userStatuses = await Promise.all(userApprovedStatusPromises);
 
     const eventsWithDetails = events.map((event, index) => ({
       ...event.toObject(),
       hostName: hostNames[index],
-      isUserPending: pendingStatuses[index],
+      hostClass: hostClasses[index],
+      ...userStatuses[index],
     }));
 
     res.json({ events: eventsWithDetails });
