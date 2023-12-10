@@ -1,8 +1,14 @@
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .LoginContainer {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 162px 35%;
+  width: 460px;
 }
 
 .LoginInput {
@@ -46,8 +52,8 @@
   margin-top: 8px;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   .LoginContainer {
-    padding: 162px 10%;
+    width: 92%;
   }
 }
