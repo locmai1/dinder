@@ -50,7 +50,7 @@
 }
 
 /* For mobile view */
-@media (max-width: 375px) {
+@media (max-width: 430px) {
   .navbar {
     padding-inline: 56px;
   }

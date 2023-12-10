@@ -59,8 +59,8 @@ export default function CreateModal({ setCreateModalOpen }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="ModalBackground">
-        <div className="ModalContent">
+      <div className="ModalBackground-hosting">
+        <div className="ModalContent-hosting">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ fontSize: 36, fontWeight: "700" }}>Create Dinder</div>
             <Icon
