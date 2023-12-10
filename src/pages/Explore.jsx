@@ -88,7 +88,7 @@ export default function Explore() {
           </div>
         </div>
 
-        <div className="format">
+        <div className="format-explore">
           {events.map((event, index) => (
             <div key={index} className="event">
               <div className="event-head-explore">
