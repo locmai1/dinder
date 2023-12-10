@@ -63,9 +63,26 @@ export default function MyProfile() {
             <div className="Name">
               <p className="Username">{profileData && profileData.name}</p>
               <p className="Email">{profileData && profileData.email}</p>
+              <button className="EditButtonMobile">
+                Edit
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="16"
+                  viewBox="0 0 15 16"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10.0126 1.4696C10.696 0.786175 11.804 0.786178 12.4874 1.4696L13.5732 2.55539C14.2566 3.2388 14.2566 4.34684 13.5732 5.03026L4.96358 13.6399C4.75328 13.8502 4.49286 14.0034 4.2069 14.0851L0.956062 15.0139C0.694162 15.0888 0.412292 15.0157 0.219692 14.8231C0.0270925 14.6305 -0.0459506 14.3487 0.0288724 14.0868L0.957692 10.8359C1.03939 10.55 1.19262 10.2895 1.40292 10.0792L10.0126 1.4696ZM11.4268 2.53026C11.3291 2.43263 11.1708 2.43263 11.0732 2.53026L9.81063 3.79282L11.25 5.23216L12.5126 3.9696C12.6102 3.87197 12.6102 3.71368 12.5126 3.61605L11.4268 2.53026ZM10.1893 6.29282L8.75002 4.85348L2.46358 11.1399C2.43354 11.1699 2.41165 11.2071 2.39997 11.248L1.84203 13.2008L3.79482 12.6428C3.83567 12.6312 3.87287 12.6093 3.90292 12.5792L10.1893 6.29282Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
-          <button className="EditButton">
+          <button className="EditButtonDesktop">
             Edit
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,34 +109,27 @@ export default function MyProfile() {
             </div>
             <div className="Item">Allergens/Restrictions</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <div className="MyProfileYellowContainer">Gluten-Free</div>
+              {profileData && profileData.restrictions.map((restriction, index) => (
+                <div key={index} className="MyProfileYellowContainer">
+                  {restriction}
+                </div>
+              ))}
             </div>
             <div className="Item">Interests</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
-              <div className="MyProfileYellowContainer">Movies</div>
-              <div className="MyProfileYellowContainer">Sports</div>
+            {profileData && profileData.interests.map((interest, index) => (
+                <div key={index} className="MyProfileYellowContainer">
+                  {interest}
+                </div>
+              ))}
             </div>
             <div className="Item">Year</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <div className="MyProfileYellowContainer">2025</div>
+              <div className="MyProfileYellowContainer">{profileData && profileData.class}</div>
             </div>
             <div className="Item">Meal Swip Balance</div>
             <div className="MyProfileGrayContainer">165</div>
-            <div className="Item">Guest Meal Swipes Left</div>
+            <div className="Item">Guest Meal Swipes</div>
             <div className="MyProfileGrayContainer">13</div>
           </div>
         </div>

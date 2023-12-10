@@ -1,149 +1,160 @@
 import "../styles/Explore.css";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExploreFilter from "../components/ExploreFilter";
 
 export default function Explore() {
-	const [filterOpen, setFilterOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-	const meals = ["Breakfast", "Lunch", "Dinner"];
-	const locations = ["Carm", "Dewick", "Hodgdon"];
-	const years = ["2024", "2025", "2026", "2027", "Grad"];
-	const purposes = ["Chat", "Advice", "Other"];
+  const meals = ["Breakfast", "Lunch", "Dinner"];
+  const locations = ["Carm", "Dewick", "Hodgdon"];
+  const years = ["2024", "2025", "2026", "2027", "Grad"];
+  const purposes = ["Chat", "Advice", "Other"];
 
-	const [mealIndexes, setMealIndexes] = useState([]);
-	const [date, setDate] = useState();
-	const [locationIndexes, setLocationIndexes] = useState([]);
-	const [yearIndexes, setYearIndexes] = useState([]);
-	const [purposeIndexes, setPurposeIndexes] = useState([]);
+  const [mealIndexes, setMealIndexes] = useState([]);
+  const [date, setDate] = useState();
+  const [locationIndexes, setLocationIndexes] = useState([]);
+  const [yearIndexes, setYearIndexes] = useState([]);
+  const [purposeIndexes, setPurposeIndexes] = useState([]);
+  const [events, setEvents] = useState([]);
 
-	return (
-		<div>
-			<Navbar />
-			<div className="Explore">
-				<div className="heading">Explore</div>
-				<div className="bar">
-					<div className="sub-heading">Based on your preferences...</div>
-					<div className="filter" onClick={() => setFilterOpen(true)}>
-						<div>Filter</div>
-						<img src="img/filter.svg" alt="Filter" />
-					</div>
-				</div>
+  const baseURL = "http://localhost:3001";
 
-				<div className="format">
-					<div className="event">
-						<div className="event-head-explore">
-							<div className="event-title-hours">
-								<div className="event-title">Dinner @ 6</div>
-								<div className="event-hours-ago">2 hrs ago</div>
-							</div>
-							<div>Anna L.</div>
-						</div>
+  const calculateHoursAgo = (dateTime) => {
+    const now = new Date();
+    const timeDifference = now - new Date(dateTime);
+    const hoursAgo = Math.round(timeDifference / (1000 * 60 * 60));
+    return hoursAgo;
+  };
 
-						<div className="event-grid">
-							<div>Date </div>
-							<div className="event-content">15 March</div>
-							<div>Type</div>
-							<div className="event-content">1 on 1</div>
-							<div>Location </div>
-							<div className="event-content">Carm</div>
-							<div>Purpose</div>
-							<div className="event-content">Advice</div>
-						</div>
+  const formatDate = (dateTime) => {
+    const options = { month: "short", day: "numeric" };
+    return new Date(dateTime).toLocaleDateString("en-US", options);
+  };
 
-						<div className="meeting-location">
-							<div>Meeting Location</div>
-							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-						</div>
+  useEffect(() => {
+    const fetchAllEvents = async () => {
+      try {
+        const response = await fetch(baseURL + "/events", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-						<div className="request-button">
-							<div>Request</div>
-							<img src="img/plus-black.svg" alt="Plus-Black" />
-						</div>
-					</div>
+        if (response.ok) {
+          const data = await response.json();
+          setEvents(data.events);
+        } else {
+          console.error("Error getting events:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error.message);
+      }
+    };
 
-					<div className="event">
-						<div className="event-head-explore">
-							<div className="event-title-hours">
-								<div className="event-title">Dinner @ 6:30</div>
-								<div className="event-hours-ago">2 hrs ago</div>
-							</div>
-							<div>Jenny K.</div>
-						</div>
+    fetchAllEvents();
+  }, []);
 
-						<div className="event-grid">
-							<div>Date </div>
-							<div className="event-content">16 March</div>
-							<div>Type</div>
-							<div className="event-content">1 on 1</div>
-							<div>Location </div>
-							<div className="event-content">Carm</div>
-							<div>Purpose</div>
-							<div className="event-content">Advice</div>
-						</div>
+  const requestEvent = async (id) => {
+    try {
+      const response = await fetch(baseURL + "/events/request/" + id, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-						<div className="meeting-location">
-							<div>Meeting Location</div>
-							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-						</div>
+      if (!response.ok) {
+        console.error("Error getting events:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error requesting event:", error.message);
+    }
+  };
 
-						<div className="request-button">
-							<div>Request</div>
-							<img src="img/plus-black.svg" alt="Plus-Black" />
-						</div>
-					</div>
+  return (
+    <div>
+      <Navbar />
+      <div className="Explore">
+        <div className="heading">Explore</div>
+        <div className="bar">
+          <div className="sub-heading">Based on your preferences...</div>
+          <div className="filter" onClick={() => setFilterOpen(true)}>
+            <div>Filter</div>
+            <img src="img/filter.svg" alt="Filter" />
+          </div>
+        </div>
 
-					<div className="event">
-						<div className="event-head-explore">
-							<div className="event-title-hours">
-								<div className="event-title">Breakfast @ 9:30</div>
-								<div className="event-hours-ago">2 hrs ago</div>
-							</div>
-							<div>Stephen L.</div>
-						</div>
+        <div className="format">
+          {events.map((event, index) => (
+            <div key={index} className="event">
+              <div className="event-head-explore">
+                <div className="event-title-hours">
+                  <div className="event-title">{event.type}</div>
+                  <div className="event-hours-ago">
+                    {calculateHoursAgo(event.dateTime)} hrs ago
+                  </div>
+                </div>
+                <div>{event.hostName}</div>
+              </div>
 
-						<div className="event-grid">
-							<div>Date </div>
-							<div className="event-content">20 March</div>
-							<div>Type</div>
-							<div className="event-content">Grp of 3</div>
-							<div>Location </div>
-							<div className="event-content">Dewick</div>
-							<div>Purpose</div>
-							<div className="event-content">Chat</div>
-						</div>
+              <div className="event-grid">
+                <div>Date </div>
+                <div className="event-content">
+                  {formatDate(event.dateTime)}
+                </div>
+                <div>Type</div>
+                <div className="event-content">{event.type}</div>
+                <div>Location </div>
+                <div className="event-content">{event.location}</div>
+                <div>Purpose</div>
+                <div className="event-content">{event.purpose}</div>
+              </div>
 
-						<div className="meeting-location">
-							<div>Meeting Location</div>
-							<div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-						</div>
+              <div className="meeting-location">
+                <div>Meeting Location</div>
+                <div style={{ fontWeight: "700" }}>{event.meetingLocation}</div>
+              </div>
 
-						<div className="request-button">
-							<div>Request</div>
-							<img src="img/plus-black.svg" alt="Plus-Black" />
-						</div>
-					</div>
-				</div>
-			</div>
-			{filterOpen ? (
-				<ExploreFilter
-					meals={meals}
-					locations={locations}
-					years={years}
-					purposes={purposes}
-					mealIndexes={mealIndexes}
-					date={date}
-					locationIndexes={locationIndexes}
-					yearIndexes={yearIndexes}
-					purposeIndexes={purposeIndexes}
-					setMealIndexes={setMealIndexes}
-					setDate={setDate}
-					setLocationIndexes={setLocationIndexes}
-					setYearIndexes={setYearIndexes}
-					setPurposeIndexes={setPurposeIndexes}
-					setFilterOpen={setFilterOpen}
-				/>
-			) : null}
-		</div>
-	);
+              {event.isUserPending ? (
+                <div className="pending-button" disabled>
+                  <div>Pending</div>
+                </div>
+              ) : (
+                <div
+                  className="request-button"
+                  onClick={() => requestEvent(event._id)}
+                >
+                  <div>Request</div>
+                  <img src="img/plus-black.svg" alt="Plus-Black" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      {filterOpen ? (
+        <ExploreFilter
+          meals={meals}
+          locations={locations}
+          years={years}
+          purposes={purposes}
+          mealIndexes={mealIndexes}
+          date={date}
+          locationIndexes={locationIndexes}
+          yearIndexes={yearIndexes}
+          purposeIndexes={purposeIndexes}
+          setMealIndexes={setMealIndexes}
+          setDate={setDate}
+          setLocationIndexes={setLocationIndexes}
+          setYearIndexes={setYearIndexes}
+          setPurposeIndexes={setPurposeIndexes}
+          setFilterOpen={setFilterOpen}
+        />
+      ) : null}
+    </div>
+  );
 }
