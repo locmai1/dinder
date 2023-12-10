@@ -212,6 +212,21 @@ app.get("/events/host", authenticate, async (req, res) => {
   }
 });
 
+app.get("/events/join", authenticate, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const joinedEvents = await Event.find({
+      $or: [{ pendingUsers: userId }, { approvedUsers: userId }],
+    });
+
+    res.json({ joinedEvents });
+  } catch (err) {
+    console.error("Error fetching joined events:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.patch("/events/edit/:id", authenticate, async (req, res) => {
   try {
     const eventId = req.params.id;
