@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import "../styles/MyProfile.css";
-import "../styles/SignUp.css";
+import "../styles/Onboarding.css";
 
 export default function MyProfile() {
   return (

@@ -1,30 +1,47 @@
 import "../styles/Login.css";
+import { useState } from "react";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLoginClick = () => {
+    if (email === "" || password === "") {
+      alert("Please fill in all fields");
+    } else {
+      // @TODO: Authenticate user
+      console.log("Email:", email);
+      console.log("Password:", password);
+    }
+  };
+
   return (
-    <div className="Login">
-      <div
-        style={{
-          fontSize: "48px",
-          fontWeight: "700",
-        }}
-      >
+    <div className="LoginContainer">
+      <div className="LoginTitle">
         din<span style={{ color: "#FFD233" }}>der</span>
       </div>
-
-      <div className="input">
-        <div style={{ textAlign: "left" }}>Login</div>
-        <input type="text" id="email" className="text-input"></input>
+      <div className="LoginSubtitle">Login</div>
+      <input
+        type="text"
+        id="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        className="LoginInput"
+      />
+      <div className="LoginSubtitle" style={{ marginTop: 8 }}>
+        Password
       </div>
-
-      <div className="input">
-        <div style={{ textAlign: "left" }}>Password</div>
-        <input type="password" id="password" className="text-input"></input>
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        className="LoginInput"
+      />
+      <div className="LoginButton" onClick={onLoginClick}>
+        Login
       </div>
-
-      <div className="primary-button">Login</div>
-
-      <a href="/signup" style={{ color: "black" }}>
+      <a href="/signup" className="LoginSignUpText">
         Sign Up
       </a>
     </div>
