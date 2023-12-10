@@ -1,8 +1,15 @@
+.MainSignUpContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .SignUpContainer {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 162px 35%;
+  width: 460px;
+  padding: 100px 0px 0px 0px;
 }
 
 .SignUpTitle {
@@ -38,8 +45,8 @@
   cursor: pointer;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   .SignUpContainer {
-    padding: 162px 10%;
+    width: 92%;
   }
 }

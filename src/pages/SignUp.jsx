@@ -47,48 +47,50 @@ export default function SignUp() {
   };
 
   return (
-    <div className="SignUpContainer">
-      <div className="SignUpTitle">Sign up</div>
-      <div type="text" id="email" className="SignUpSubtitle">
-        Login Email
-      </div>
-      <input
-        type="text"
-        id="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        className="SignUpInput"
-      />
-      <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
-        Password
-      </div>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(event) => {
-          setPassword(event.target.value);
-          setWarning(false);
-        }}
-        className="SignUpInput"
-        style={{ border: warning ? "1px solid red" : "none" }}
-      />
-      <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
-        Confirm Password
-      </div>
-      <input
-        type="password"
-        id="password"
-        value={confirmPassword}
-        onChange={(event) => {
-          setConfirmPassword(event.target.value);
-          setWarning(false);
-        }}
-        className="SignUpInput"
-        style={{ border: warning ? "1px solid red" : "none" }}
-      />
-      <div className="SignUpButton" onClick={onSignUpClick}>
-        Sign up
+    <div className="MainSignUpContainer">
+      <div className="SignUpContainer">
+        <div className="SignUpTitle">Sign up</div>
+        <div type="text" id="email" className="SignUpSubtitle">
+          Login Email
+        </div>
+        <input
+          type="text"
+          id="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className="SignUpInput"
+        />
+        <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
+          Password
+        </div>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+            setWarning(false);
+          }}
+          className="SignUpInput"
+          style={{ border: warning ? "1px solid red" : "none" }}
+        />
+        <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
+          Confirm Password
+        </div>
+        <input
+          type="password"
+          id="password"
+          value={confirmPassword}
+          onChange={(event) => {
+            setConfirmPassword(event.target.value);
+            setWarning(false);
+          }}
+          className="SignUpInput"
+          style={{ border: warning ? "1px solid red" : "none" }}
+        />
+        <div className="SignUpButton" onClick={onSignUpClick}>
+          Sign up
+        </div>
       </div>
     </div>
   );
