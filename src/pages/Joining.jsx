@@ -49,7 +49,7 @@ export default function Joining() {
       <Navbar />
       <div className="Joining">
         <div className="heading">Joining</div>
-        <div className="sub-heading" style={{ marginBottom: 56 }}>
+        <div className="sub-heading" style={{ marginBottom: 28 }}>
           Confirmed dinders
         </div>
 
@@ -94,7 +94,7 @@ export default function Joining() {
 
         <div
           className="sub-heading"
-          style={{ marginBottom: 56, marginTop: 28 }}
+          style={{ marginBottom: 28, marginTop: 28 }}
         >
           Pending Requests
         </div>
