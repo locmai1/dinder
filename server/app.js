@@ -209,9 +209,12 @@ app.get("/events", authenticate, async (req, res) => {
 
 app.get("/events/host", authenticate, async (req, res) => {
   try {
-    const hostUserId = req.user._id;
+    const userId = req.user._id;
 
-    const hostedEvents = await Event.find({ host: hostUserId });
+    const hostedEvents = await Event.find({ host: userId }).populate({
+      path: "approvedUsers pendingUsers",
+      select: "name email",
+    });
 
     res.json({ hostedEvents });
   } catch (err) {

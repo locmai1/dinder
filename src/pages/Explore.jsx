@@ -130,7 +130,7 @@ export default function Explore() {
         </div>
 
         <div className="format-explore">
-          {events.map((event, index) => (
+          {filteredEvents.map((event, index) => (
             <div key={index} className="event">
               <div className="event-head-explore">
                 <div className="event-title-hours">

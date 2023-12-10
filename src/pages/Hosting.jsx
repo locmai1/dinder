@@ -35,24 +35,58 @@ export default function Hosting() {
     fetchHostingData();
   }, []);
 
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const denyUserRequest = async (userEmail, eventId) => {
+    try {
+      const response = await fetch(baseURL + "/events/deny/" + eventId, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail,
+        }),
+      });
 
-  const getDayMonth = (dateTime) => {
-    let date = new Date(dateTime);
-    return "" + date.getDate() + " " + monthNames[date.getMonth()];
+      if (!response.ok) {
+        console.error("Error denying user:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error making deny request:", error.message);
+    }
+  };
+
+  const approveUserRequest = async (userEmail, eventId) => {
+    try {
+      const response = await fetch(baseURL + "/events/approve/" + eventId, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Error approving user:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error making approve request:", error.message);
+    }
+  };
+
+  const calculateHoursAgo = (dateTime) => {
+    const now = new Date();
+    const timeDifference = now - new Date(dateTime);
+    const hoursAgo = Math.round(timeDifference / (1000 * 60 * 60));
+    return hoursAgo;
+  };
+
+  const formatDate = (dateTime) => {
+    const options = { month: "short", day: "numeric" };
+    return new Date(dateTime).toLocaleDateString("en-US", options);
   };
 
   return (
@@ -75,108 +109,85 @@ export default function Hosting() {
         </div>
 
         <div className="format-hosting">
-          <div>
-            <div className="event-hosting">
-              <div className="event-head-hosting">
-                <div className="event-title-hours">
-                  <div className="event-title">Dinner @ 6</div>
-                  <div className="event-hours-ago">2 hrs ago</div>
+          {hostedEvents.map((event, indexEvent) => (
+            <div key={indexEvent}>
+              <div
+                className="event-hosting"
+                style={{
+                  borderRadius:
+                    event.pendingUsers.length === 0 ? 10 : "10px 10px 0px 0px",
+                }}
+              >
+                <div className="event-head-hosting">
+                  <div className="event-title-hours">
+                    <div className="event-title">{event.mealType}</div>
+                    <div className="event-hours-ago">
+                      {calculateHoursAgo(event.dateTime)} hrs ago
+                    </div>
+                  </div>
                 </div>
-                <div>Anna L.</div>
-              </div>
 
-              <div className="event-grid">
-                <div>Date </div>
-                <div className="event-content">15 March</div>
-                <div>Type</div>
-                <div className="event-content">1 on 1</div>
-                <div>Location </div>
-                <div className="event-content">Carm</div>
-                <div>Purpose</div>
-                <div className="event-content">Advice</div>
-              </div>
-
-              <div className="meeting-location">
-                <div>Meeting Location</div>
-                <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-              </div>
-            </div>
-            <div className="request-join">
-              <div>Amy W. requested to join</div>
-              <div className="accept-decline-bar">
-                <div className="accept-button">Accept</div>
-                <div className="decline-button">Decline</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="event-hosting">
-              <div className="event-head-hosting">
-                <div className="event-title-hours">
-                  <div className="event-title">Dinner @ 6</div>
-                  <div className="event-hours-ago">2 hrs ago</div>
+                <div className="event-grid">
+                  <div>Date </div>
+                  <div className="event-content">
+                    {formatDate(event.dateTime)}
+                  </div>
+                  <div>Type</div>
+                  <div className="event-content">{event.type}</div>
+                  <div>Location </div>
+                  <div className="event-content">{event.location}</div>
+                  <div>Purpose</div>
+                  <div className="event-content">{event.purpose}</div>
                 </div>
-                <div>Anna L.</div>
-              </div>
 
-              <div className="event-grid">
-                <div>Date </div>
-                <div className="event-content">15 March</div>
-                <div>Type</div>
-                <div className="event-content">1 on 1</div>
-                <div>Location </div>
-                <div className="event-content">Carm</div>
-                <div>Purpose</div>
-                <div className="event-content">Advice</div>
-              </div>
-
-              <div className="meeting-location">
-                <div>Meeting Location</div>
-                <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-              </div>
-            </div>
-            <div className="request-join">
-              <div>Amy W. requested to join</div>
-              <div className="accept-decline-bar">
-                <div className="accept-button">Accept</div>
-                <div className="decline-button">Decline</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="event-hosting">
-              <div className="event-head-hosting">
-                <div className="event-title-hours">
-                  <div className="event-title">Dinner @ 6</div>
-                  <div className="event-hours-ago">2 hrs ago</div>
+                <div className="meeting-location">
+                  <div>Meeting Location</div>
+                  <div style={{ fontWeight: "700" }}>
+                    {event.meetingLocation}
+                  </div>
                 </div>
-                <div>Anna L.</div>
-              </div>
 
-              <div className="event-grid">
-                <div>Date </div>
-                <div className="event-content">15 March</div>
-                <div>Type</div>
-                <div className="event-content">1 on 1</div>
-                <div>Location </div>
-                <div className="event-content">Carm</div>
-                <div>Purpose</div>
-                <div className="event-content">Advice</div>
+                {event.pendingUsers.length === 0 && (
+                  <div className="chat-button">
+                    <img src="img/chat.svg" alt="Chat" />
+                    <div>Chat</div>
+                  </div>
+                )}
               </div>
-
-              <div className="meeting-location">
-                <div>Meeting Location</div>
-                <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-              </div>
+              {event.pendingUsers.map((user, indexUser) => (
+                <div
+                  key={indexUser}
+                  className="request-join"
+                  style={{
+                    borderRadius:
+                      indexUser === event.pendingUsers.length - 1
+                        ? "0px 0px 10px 10px"
+                        : "0px",
+                  }}
+                >
+                  <div>{user.name} requested to join</div>
+                  <div className="accept-decline-bar">
+                    <div
+                      className="accept-button"
+                      onClick={() => {
+                        approveUserRequest(user.email, event._id);
+                      }}
+                    >
+                      Accept
+                    </div>
+                    <div
+                      className="decline-button"
+                      onClick={() => {
+                        denyUserRequest(user.email, event._id);
+                      }}
+                    >
+                      Decline
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="request-join">
-              <div>Amy W. requested to join</div>
-              <div className="accept-decline-bar">
-                <div className="accept-button">Accept</div>
-                <div className="decline-button">Decline</div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       {createModalOpen ? (
