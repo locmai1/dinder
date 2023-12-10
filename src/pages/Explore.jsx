@@ -1,6 +1,6 @@
 import "../styles/Explore.css";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExploreFilter from "../components/ExploreFilter";
 
 export default function Explore() {
@@ -16,6 +16,64 @@ export default function Explore() {
   const [locationIndexes, setLocationIndexes] = useState([]);
   const [yearIndexes, setYearIndexes] = useState([]);
   const [purposeIndexes, setPurposeIndexes] = useState([]);
+  const [events, setEvents] = useState([]);
+
+  const baseURL = "http://localhost:3001";
+
+  const calculateHoursAgo = (dateTime) => {
+    const now = new Date();
+    const timeDifference = now - new Date(dateTime);
+    const hoursAgo = Math.round(timeDifference / (1000 * 60 * 60));
+    return hoursAgo;
+  };
+
+  const formatDate = (dateTime) => {
+    const options = { month: "short", day: "numeric" };
+    return new Date(dateTime).toLocaleDateString("en-US", options);
+  };
+
+  useEffect(() => {
+    const fetchAllEvents = async () => {
+      try {
+        const response = await fetch(baseURL + "/events", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setEvents(data.events);
+        } else {
+          console.error("Error getting events:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error.message);
+      }
+    };
+
+    fetchAllEvents();
+  }, []);
+
+  const requestEvent = async (id) => {
+    try {
+      const response = await fetch(baseURL + "/events/request/" + id, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.error("Error getting events:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error requesting event:", error.message);
+    }
+  };
 
   return (
     <div>
@@ -31,98 +89,51 @@ export default function Explore() {
         </div>
 
         <div className="format">
-          <div className="event">
-            <div className="event-head-explore">
-              <div className="event-title-hours">
-                <div className="event-title">Dinner @ 6</div>
-                <div className="event-hours-ago">2 hrs ago</div>
+          {events.map((event, index) => (
+            <div key={index} className="event">
+              <div className="event-head-explore">
+                <div className="event-title-hours">
+                  <div className="event-title">{event.type}</div>
+                  <div className="event-hours-ago">
+                    {calculateHoursAgo(event.dateTime)} hrs ago
+                  </div>
+                </div>
+                <div>{event.hostName}</div>
               </div>
-              <div>Anna L.</div>
-            </div>
 
-            <div className="event-grid">
-              <div>Date </div>
-              <div className="event-content">15 March</div>
-              <div>Type</div>
-              <div className="event-content">1 on 1</div>
-              <div>Location </div>
-              <div className="event-content">Carm</div>
-              <div>Purpose</div>
-              <div className="event-content">Advice</div>
-            </div>
-
-            <div className="meeting-location">
-              <div>Meeting Location</div>
-              <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-            </div>
-
-            <div className="request-button">
-              <div>Request</div>
-              <img src="img/plus-black.svg" alt="Plus-Black" />
-            </div>
-          </div>
-
-          <div className="event">
-            <div className="event-head-explore">
-              <div className="event-title-hours">
-                <div className="event-title">Dinner @ 6:30</div>
-                <div className="event-hours-ago">2 hrs ago</div>
+              <div className="event-grid">
+                <div>Date </div>
+                <div className="event-content">
+                  {formatDate(event.dateTime)}
+                </div>
+                <div>Type</div>
+                <div className="event-content">{event.type}</div>
+                <div>Location </div>
+                <div className="event-content">{event.location}</div>
+                <div>Purpose</div>
+                <div className="event-content">{event.purpose}</div>
               </div>
-              <div>Jenny K.</div>
-            </div>
 
-            <div className="event-grid">
-              <div>Date </div>
-              <div className="event-content">16 March</div>
-              <div>Type</div>
-              <div className="event-content">1 on 1</div>
-              <div>Location </div>
-              <div className="event-content">Carm</div>
-              <div>Purpose</div>
-              <div className="event-content">Advice</div>
-            </div>
-
-            <div className="meeting-location">
-              <div>Meeting Location</div>
-              <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-            </div>
-
-            <div className="request-button">
-              <div>Request</div>
-              <img src="img/plus-black.svg" alt="Plus-Black" />
-            </div>
-          </div>
-
-          <div className="event">
-            <div className="event-head-explore">
-              <div className="event-title-hours">
-                <div className="event-title">Breakfast @ 9:30</div>
-                <div className="event-hours-ago">2 hrs ago</div>
+              <div className="meeting-location">
+                <div>Meeting Location</div>
+                <div style={{ fontWeight: "700" }}>{event.meetingLocation}</div>
               </div>
-              <div>Stephen L.</div>
-            </div>
 
-            <div className="event-grid">
-              <div>Date </div>
-              <div className="event-content">20 March</div>
-              <div>Type</div>
-              <div className="event-content">Grp of 3</div>
-              <div>Location </div>
-              <div className="event-content">Dewick</div>
-              <div>Purpose</div>
-              <div className="event-content">Chat</div>
+              {event.isUserPending ? (
+                <div className="pending-button" disabled>
+                  <div>Pending</div>
+                </div>
+              ) : (
+                <div
+                  className="request-button"
+                  onClick={() => requestEvent(event._id)}
+                >
+                  <div>Request</div>
+                  <img src="img/plus-black.svg" alt="Plus-Black" />
+                </div>
+              )}
             </div>
-
-            <div className="meeting-location">
-              <div>Meeting Location</div>
-              <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
-            </div>
-
-            <div className="request-button">
-              <div>Request</div>
-              <img src="img/plus-black.svg" alt="Plus-Black" />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       {filterOpen ? (
