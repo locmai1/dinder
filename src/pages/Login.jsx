@@ -30,7 +30,12 @@ export default function Login() {
         localStorage.setItem("token", token);
 
         login(email, password);
-        navigate("/");
+
+        if (data.onboarded === false) {
+          navigate("/onboarding");
+        } else {
+          navigate("/");
+        }
       } else {
         console.error("Error logging in", response.statusText);
       }

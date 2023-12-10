@@ -1,10 +1,14 @@
 import "../styles/SignUp.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  const baseURL = "http://localhost:3001";
 
   const [warning, setWarning] = useState(false);
 
@@ -15,9 +19,30 @@ export default function SignUp() {
     } else if (email === "" || password === "") {
       alert("Please fill in all fields");
     } else {
-      // @TODO: Create a new user
-      console.log("Email:", email);
-      console.log("Password:", password);
+      handleSignup(email, password);
+    }
+  };
+
+  const handleSignup = async (email, password) => {
+    try {
+      const response = await fetch(baseURL + "/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        navigate("/onboarding");
+      } else {
+        console.error("Error signing up:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Signup failed:", error);
     }
   };
 
@@ -25,7 +50,7 @@ export default function SignUp() {
     <div className="SignUpContainer">
       <div className="SignUpTitle">Sign up</div>
       <div type="text" id="email" className="SignUpSubtitle">
-        Login
+        Login Email
       </div>
       <input
         type="text"

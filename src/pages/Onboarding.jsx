@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/Onboarding.css";
 
+// TODO: hookup /users/edit route (token should already be in localstorage)
 export default function Onboarding() {
   const years = [2024, 2025, 2026, 2027];
   const pronouns = ["He/him", "She/her", "They/them", "Other"];
