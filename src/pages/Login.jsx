@@ -52,34 +52,28 @@ export default function Login() {
       <div className="LoginTitle">
         din<span style={{ color: "#FFD233" }}>der</span>
       </div>
-
-      <div className="input">
-        <div style={{ textAlign: "left" }}>Login</div>
-        <input
-          type="text"
-          id="email"
-          className="text-input"
-          value={email}
-          onChange={handleEmailChange}
-        />
+      <div className="LoginSubtitle">Login</div>
+      <input
+        type="text"
+        id="email"
+        value={email}
+        onChange={handleEmailChange}
+        className="LoginInput"
+      />
+      <div className="LoginSubtitle" style={{ marginTop: 8 }}>
+        Password
       </div>
-
-      <div className="input">
-        <div style={{ textAlign: "left" }}>Password</div>
-        <input
-          type="password"
-          id="password"
-          className="text-input"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-
-      <div className="primary-button" onClick={handleLogin}>
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={handlePasswordChange}
+        className="LoginInput"
+      />
+      <div className="LoginButton" onClick={handleLogin}>
         Login
       </div>
-
-      <a href="/signup" style={{ color: "black" }}>
+      <a href="/signup" className="LoginSignUpText">
         Sign Up
       </a>
     </div>
