@@ -7,6 +7,7 @@ import MyProfile from "./pages/MyProfile";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import withAuth from "./utils/withAuth";
+import Onboarding from "./pages/Onboarding";
 
 function App() {
   const AuthenticatedHosting = withAuth(Hosting);
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile" element={<AuthenticatedMyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/onboarding" element={<Onboarding />} />
       </Routes>
     </div>
   );

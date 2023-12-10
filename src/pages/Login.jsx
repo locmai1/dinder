@@ -48,13 +48,8 @@ export default function Login() {
   };
 
   return (
-    <div className="Login">
-      <div
-        style={{
-          fontSize: "48px",
-          fontWeight: "700",
-        }}
-      >
+    <div className="LoginContainer">
+      <div className="LoginTitle">
         din<span style={{ color: "#FFD233" }}>der</span>
       </div>
 

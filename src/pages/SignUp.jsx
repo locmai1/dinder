@@ -1,173 +1,70 @@
-import { useState } from "react";
 import "../styles/SignUp.css";
+import { useState } from "react";
 
 export default function SignUp() {
-  const years = [2024, 2025, 2026, 2027];
-  const pronouns = ["He/him", "She/her", "They/them", "Other"];
-  const restrictions = [
-    "Vegan",
-    "Vegetarian",
-    "Soy-Free",
-    "Pescatarian",
-    "Gluten-Free",
-    "Nut-Free",
-    "Dairy-Free",
-    "Other",
-  ];
-  const interests = [
-    "Art",
-    "Movies",
-    "Music",
-    "Sports",
-    "Cooking",
-    "Traveling",
-    "Activism",
-    "Reading",
-    "Gaming",
-  ];
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [preferredName, setPreferredName] = useState("");
-  const [yearIndex, setYearIndex] = useState(-1);
-  const [pronounIndex, setPronounIndex] = useState(-1);
-  const [restrictionsIndexes, setRestrictionsIndexes] = useState([]);
-  const [interestsIndexes, setInterestsIndexes] = useState([]);
+  const [warning, setWarning] = useState(false);
+
+  const onSignUpClick = () => {
+    if (password !== confirmPassword) {
+      setWarning(true);
+      alert("Your passwords must match");
+    } else if (email === "" || password === "") {
+      alert("Please fill in all fields");
+    } else {
+      // @TODO: Create a new user
+      console.log("Email:", email);
+      console.log("Password:", password);
+    }
+  };
 
   return (
     <div className="SignUpContainer">
-      <h1 className="SignUpTitleText">Tell us a bit about yourself!</h1>
-      <div className="SignUpGridDiv">
-        <div className="SignUpSubText">Preferred Name</div>
-        <div className="SignUpSubText">Class Year</div>
-        <input
-          className="SignUpInput"
-          type="text"
-          value={preferredName}
-          onChange={(event) => setPreferredName(event.target.value)}
-        />
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: 10,
-          }}
-        >
-          {years.map((year, index) => (
-            <div
-              key={index}
-              className="SignUpYellowContainer"
-              style={{
-                backgroundColor:
-                  yearIndex === index ? "rgba(242, 201, 76, 0.50)" : "#fff",
-              }}
-              onClick={() => setYearIndex(yearIndex === index ? -1 : index)}
-            >
-              {year}
-            </div>
-          ))}
-        </div>
+      <div className="SignUpTitle">Sign up</div>
+      <div type="text" id="email" className="SignUpSubtitle">
+        Login
       </div>
-      <div style={{ marginTop: 28 }}>
-        <div className="SignUpSubText" style={{ marginBottom: 10 }}>
-          Pronouns
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {pronouns.map((pronoun, index) => (
-            <div
-              key={index}
-              className="SignUpYellowContainer"
-              style={{
-                backgroundColor:
-                  pronounIndex === index ? "rgba(242, 201, 76, 0.50)" : "#fff",
-              }}
-              onClick={() =>
-                setPronounIndex(pronounIndex === index ? -1 : index)
-              }
-            >
-              {pronoun}
-            </div>
-          ))}
-        </div>
+      <input
+        type="text"
+        id="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        className="SignUpInput"
+      />
+      <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
+        Password
       </div>
-      <div style={{ marginTop: 28 }}>
-        <div className="SignUpSubText" style={{ marginBottom: 10 }}>
-          Allergens/Restrictions
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {restrictions.map((restriction, index) => (
-            <div
-              key={index}
-              className="SignUpYellowContainer"
-              style={{
-                backgroundColor: restrictionsIndexes.includes(index)
-                  ? "rgba(242, 201, 76, 0.50)"
-                  : "#fff",
-              }}
-              onClick={() =>
-                setRestrictionsIndexes(
-                  restrictionsIndexes.includes(index)
-                    ? restrictionsIndexes.filter(
-                        (restrictionIndex) => restrictionIndex !== index
-                      )
-                    : [...restrictionsIndexes, index]
-                )
-              }
-            >
-              {restriction}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ marginTop: 28 }}>
-        <div className="SignUpSubText" style={{ marginBottom: 10 }}>
-          Interests
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {interests.map((interest, index) => (
-            <div
-              key={index}
-              className="SignUpYellowContainer"
-              style={{
-                backgroundColor: interestsIndexes.includes(index)
-                  ? "rgba(242, 201, 76, 0.50)"
-                  : "#fff",
-              }}
-              onClick={() =>
-                setInterestsIndexes(
-                  interestsIndexes.includes(index)
-                    ? interestsIndexes.filter(
-                        (interestIndex) => interestIndex !== index
-                      )
-                    : [...interestsIndexes, index]
-                )
-              }
-            >
-              {interest}
-            </div>
-          ))}
-        </div>
-      </div>
-      <button
-        className="SignUpYellowButton"
-        onClick={() => {
-          // @TODO: Remove this and replace with route and save data to database
-          console.log(`Preferred Name: ${preferredName}`);
-          console.log(`Year: ${years[yearIndex]}`);
-          console.log(`Pronoun: ${pronouns[pronounIndex]}`);
-          console.log(
-            `Restrictions: ${restrictionsIndexes.map(
-              (index) => ` ${restrictions[index]}`
-            )}`
-          );
-          console.log(
-            `Interests: ${interestsIndexes.map(
-              (index) => ` ${interests[index]}`
-            )}`
-          );
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={(event) => {
+          setPassword(event.target.value);
+          setWarning(false);
         }}
-      >
-        Continue
-      </button>
+        className="SignUpInput"
+        style={{ border: warning ? "1px solid red" : "none" }}
+      />
+      <div className="SignUpSubtitle" style={{ marginTop: 8 }}>
+        Confirm Password
+      </div>
+      <input
+        type="password"
+        id="password"
+        value={confirmPassword}
+        onChange={(event) => {
+          setConfirmPassword(event.target.value);
+          setWarning(false);
+        }}
+        className="SignUpInput"
+        style={{ border: warning ? "1px solid red" : "none" }}
+      />
+      <div className="SignUpButton" onClick={onSignUpClick}>
+        Sign up
+      </div>
     </div>
   );
 }

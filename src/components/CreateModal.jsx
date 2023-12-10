@@ -75,7 +75,7 @@ export default function CreateModal({ setCreateModalOpen }) {
             {meals.map((meal, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="HostingYellowContainer"
                 style={{
                   backgroundColor:
                     mealIndex === index ? "rgba(242, 201, 76, 0.50)" : "#fff",
@@ -147,7 +147,7 @@ export default function CreateModal({ setCreateModalOpen }) {
             {locations.map((location, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="HostingYellowContainer"
                 style={{
                   backgroundColor:
                     locationIndex === index
@@ -174,16 +174,17 @@ export default function CreateModal({ setCreateModalOpen }) {
               getSuggestionItemProps,
               loading,
             }) => (
-              <div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 <input
                   style={{
                     backgroundColor: "white",
-                    border: "1px solid #B9B9B9",
-                    width: "100%",
+                    border: "1px solid black",
                     fontSize: 16,
                     cursor: "text",
                     color: "black",
                     boxShadow: "none",
+                    borderRadius: 5,
+                    padding: "10px 15px",
                   }}
                   {...getInputProps({
                     placeholder: "Choose Location",
@@ -194,6 +195,7 @@ export default function CreateModal({ setCreateModalOpen }) {
                   style={{
                     width: "25%",
                     position: "absolute",
+                    marginTop: 40,
                     zIndex: 99,
                     border: suggestions.length > 0 ? "0.5px solid #B9B9B9" : "",
                     borderRadius: 5,
@@ -252,14 +254,23 @@ export default function CreateModal({ setCreateModalOpen }) {
             {types.map((type, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="HostingYellowContainer"
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 7,
                   backgroundColor:
                     typeIndex === index ? "rgba(242, 201, 76, 0.50)" : "#fff",
                 }}
                 onClick={() => setTypeIndex(index)}
               >
-                {type}
+                {type === "1 on 1" ? (
+                  <Icon icon={"octicon:person-24"} height={16} />
+                ) : (
+                  <Icon icon={"octicon:people-24"} height={16} />
+                )}
+                <span>{type}</span>
               </div>
             ))}
           </div>
@@ -268,7 +279,7 @@ export default function CreateModal({ setCreateModalOpen }) {
             {purposes.map((purpose, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="HostingYellowContainer"
                 style={{
                   backgroundColor:
                     purposeIndex === index

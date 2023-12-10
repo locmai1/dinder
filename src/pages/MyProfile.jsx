@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import "../styles/MyProfile.css";
-import "../styles/SignUp.css";
+import "../styles/Onboarding.css";
 
 export default function MyProfile() {
   const [profileData, setProfileData] = useState(null);

@@ -56,7 +56,7 @@ export default function ExploreFilter({
             {meals.map((meal, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="ExploreYellowContainer"
                 style={{
                   backgroundColor: tempMealIndexes.includes(index)
                     ? "rgba(242, 201, 76, 0.50)"
@@ -109,7 +109,7 @@ export default function ExploreFilter({
             {locations.map((location, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="ExploreYellowContainer"
                 style={{
                   backgroundColor: tempLocationIndexes.includes(index)
                     ? "rgba(242, 201, 76, 0.50)"
@@ -134,7 +134,7 @@ export default function ExploreFilter({
             {years.map((year, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="ExploreYellowContainer"
                 style={{
                   backgroundColor: tempYearIndexes.includes(index)
                     ? "rgba(242, 201, 76, 0.50)"
@@ -159,7 +159,7 @@ export default function ExploreFilter({
             {purposes.map((purpose, index) => (
               <div
                 key={index}
-                className="SignUpYellowContainer"
+                className="ExploreYellowContainer"
                 style={{
                   backgroundColor: tempPurposeIndexes.includes(index)
                     ? "rgba(242, 201, 76, 0.50)"
