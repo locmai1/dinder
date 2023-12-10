@@ -31,7 +31,7 @@
 	cursor: pointer;
 }
 
-.event {
+.event-explore {
 	display: flex;
 	width: 29.5%;
 	padding: 16px;
@@ -242,8 +242,8 @@
 		align-items: flex-start;
 	}
 
-	.event {
-		width: 100%;
+	.event-explore {
+		width: 88%;
 	}
 
 	.event-grid {
