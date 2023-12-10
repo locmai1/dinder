@@ -37,3 +37,9 @@
   padding-block: 8px;
   cursor: pointer;
 }
+
+@media (max-width: 430px) {
+  .SignUpContainer {
+    padding: 162px 10%;
+  }
+}

@@ -44,6 +44,7 @@
   font-size: 16px;
   font-weight: 700;
   margin-top: 59px;
+  text-wrap: nowrap;
 }
 
 .OnboardingYellowContainer {
@@ -56,4 +57,27 @@
   font-size: 16px;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.mobile-view {
+  display: none;
+}
+
+.desktop-view {
+  display: block;
+}
+
+@media (max-width: 955px) {
+  .mobile-view {
+    display: block;
+  }
+
+  .desktop-view {
+    display: none;
+  }
+
+  .OnboardingGridDiv {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }

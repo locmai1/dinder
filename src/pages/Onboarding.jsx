@@ -38,13 +38,22 @@ export default function Onboarding() {
       <h1 className="OnboardingTitleText">Tell us a bit about yourself!</h1>
       <div className="OnboardingGridDiv">
         <div className="OnboardingSubText">Preferred Name</div>
-        <div className="OnboardingSubText">Class Year</div>
+        <div className="OnboardingSubText desktop-view">Class Year</div>
         <input
-          className="OnboardingInput"
+          className="OnboardingInput desktop-view"
           type="text"
           value={preferredName}
           onChange={(event) => setPreferredName(event.target.value)}
         />
+
+        <input
+          className="OnboardingInput mobile-view"
+          type="text"
+          value={preferredName}
+          onChange={(event) => setPreferredName(event.target.value)}
+        />
+        <div className="OnboardingSubText mobile-view">Class Year</div>
+
         <div
           style={{
             display: "flex",
@@ -167,7 +176,7 @@ export default function Onboarding() {
           );
         }}
       >
-        Continue
+        Get started
       </button>
     </div>
   );
