@@ -74,36 +74,32 @@ export default function Hosting() {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 25 }}>
+        <div className="format">
           {hostedEvents.map((event, index) => (
-            <div key={index}>
-              <div className="event">
+            <div>
+              <div className="event-hosting">
                 <div className="event-head-hosting">
                   <div className="event-title-hours">
-                    <div className="event-title">{event.mealType} @ N/A</div>
-                    {/* <div className="event-hours-ago">2 hrs ago</div> */}
+                    <div className="event-title">Dinner @ 6</div>
+                    <div className="event-hours-ago">2 hrs ago</div>
                   </div>
-                  {/* <div>Anna L.</div> */}
+                  <div>Anna L.</div>
                 </div>
 
                 <div className="event-grid">
                   <div>Date </div>
-                  <div className="event-content">
-                    {getDayMonth(event.dateTime)}
-                  </div>
+                  <div className="event-content">15 March</div>
                   <div>Type</div>
-                  <div className="event-content">{event.type}</div>
+                  <div className="event-content">1 on 1</div>
                   <div>Location </div>
-                  <div className="event-content">{event.location}</div>
+                  <div className="event-content">Carm</div>
                   <div>Purpose</div>
-                  <div className="event-content">{event.purpose}</div>
+                  <div className="event-content">Advice</div>
                 </div>
 
                 <div className="meeting-location">
                   <div>Meeting Location</div>
-                  <div style={{ fontWeight: "700" }}>
-                    {event.meetingLocation}
-                  </div>
+                  <div style={{ fontWeight: "700" }}>574 Boston Ave.</div>
                 </div>
               </div>
               <div className="request-join">
@@ -117,13 +113,7 @@ export default function Hosting() {
           ))}
         </div>
 
-        {/* <div>
-          <div className="event">
-            <div className="event-head-hosting">
-              <div className="event-title-hours">
-                <div className="event-title">Dinner @ 6</div>
-                <div className="event-hours-ago">2 hrs ago</div>
-        <div className="format">
+        {/* <div className="format">
           <div>
             <div className="event-hosting">
               <div className="event-head-hosting">
