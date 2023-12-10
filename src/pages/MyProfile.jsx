@@ -6,10 +6,12 @@ import "../styles/Onboarding.css";
 export default function MyProfile() {
   const [profileData, setProfileData] = useState(null);
 
+  const baseURL = "http://localhost:3001";
+
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/users/profile", {
+        const response = await fetch(baseURL + "/users/profile", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
