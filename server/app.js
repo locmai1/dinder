@@ -96,7 +96,9 @@ app.post("/users/login", async (req, res) => {
     const token = jwt.sign({ userId: user._id }, config.secret, {
       expiresIn: "30d",
     });
-    res.json({ token });
+
+    const onboarded = user.name !== "";
+    res.json({ token, onboarded });
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });
   }
