@@ -171,7 +171,7 @@ app.post("/events/add", authenticate, async (req, res) => {
 app.get("/events", authenticate, async (req, res) => {
   try {
     const userId = req.user._id;
-    const events = await Event.find();
+    const events = await Event.find({ host: { $ne: userId } });
 
     const hostPromises = events.map(async (event) => {
       const host = await User.findOne({ _id: event.host });
@@ -208,6 +208,27 @@ app.get("/events/host", authenticate, async (req, res) => {
     res.json({ hostedEvents });
   } catch (err) {
     console.error("Error fetching hosted events:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/events/join", authenticate, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const pendingEvents = await Event.find({ pendingUsers: userId }).populate({
+      path: "host",
+      select: "name",
+    });
+
+    const joinedEvents = await Event.find({ approvedUsers: userId }).populate({
+      path: "host",
+      select: "name",
+    });
+
+    res.json({ pendingEvents, joinedEvents });
+  } catch (err) {
+    console.error("Error fetching joined events:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
