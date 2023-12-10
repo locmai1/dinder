@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Onboarding.css";
 
-// TODO: hookup /users/edit route (token should already be in localstorage)
 export default function Onboarding() {
   const years = [2024, 2025, 2026, 2027];
   const pronouns = ["He/him", "She/her", "They/them", "Other"];
@@ -32,6 +32,43 @@ export default function Onboarding() {
   const [pronounIndex, setPronounIndex] = useState(-1);
   const [restrictionsIndexes, setRestrictionsIndexes] = useState([]);
   const [interestsIndexes, setInterestsIndexes] = useState([]);
+  const navigate = useNavigate();
+
+  const baseURL = "http://localhost:3001";
+
+  const updateUserData = async () => {
+    try {
+      const selectedRestrictions = restrictionsIndexes.map(
+        (index) => restrictions[index]
+      );
+      const selectedInterests = interestsIndexes.map(
+        (index) => interests[index]
+      );
+
+      const response = await fetch(baseURL + "/users/edit", {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: preferredName,
+          class: years[yearIndex],
+          pronouns: [pronouns[pronounIndex]],
+          restrictions: selectedRestrictions,
+          interests: selectedInterests,
+        }),
+      });
+
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Error onboaring user:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching onboarding route:", error.message);
+    }
+  };
 
   return (
     <div className="OnboardingContainer">
@@ -159,22 +196,7 @@ export default function Onboarding() {
       </div>
       <div
         className="OnboardingYellowButton"
-        onClick={() => {
-          // @TODO: Remove this and replace with route and save data to database
-          console.log(`Preferred Name: ${preferredName}`);
-          console.log(`Year: ${years[yearIndex]}`);
-          console.log(`Pronoun: ${pronouns[pronounIndex]}`);
-          console.log(
-            `Restrictions: ${restrictionsIndexes.map(
-              (index) => ` ${restrictions[index]}`
-            )}`
-          );
-          console.log(
-            `Interests: ${interestsIndexes.map(
-              (index) => ` ${interests[index]}`
-            )}`
-          );
-        }}
+        onClick={() => updateUserData()}
       >
         Get started
       </div>
