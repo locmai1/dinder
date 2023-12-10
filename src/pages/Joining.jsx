@@ -51,7 +51,7 @@ export default function Joining() {
         <div className="heading">Joining</div>
         <div className="sub-heading">Confirmed dinders</div>
 
-        <div style={{ display: "flex", flexDirection: "row", gap: "25px" }}>
+        <div className="format-joining">
           {joinedEvents.map((event, index) => (
             <div className="event" key={index}>
               <div className="event-head-joining">
@@ -92,7 +92,7 @@ export default function Joining() {
 
         <div className="sub-heading">Pending Requests</div>
 
-        <div style={{ display: "flex", flexDirection: "row", gap: "25px" }}>
+        <div className="format-joining">
           {pendingEvents.map((event, index) => (
             <div className="event" key={index}>
               <div className="event-head-joining">
