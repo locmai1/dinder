@@ -88,6 +88,21 @@
   color: black;
 }
 
+.pending-button {
+  display: flex;
+  padding-block: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 10px;
+  border: 1px solid #eb5757;
+  background: white;
+  font-size: 12px;
+  font-weight: 500;
+  color: #eb5757;
+}
+
 .format {
   display: flex;
   flex-direction: row;
@@ -128,7 +143,7 @@
   z-index: 1000;
 }
 
-.ModalContent {
+.ModalContent-explore {
   width: 24vw;
   height: 80vh;
   overflow-y: scroll;
@@ -187,7 +202,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 430px) {
   .Explore {
     padding-inline: 56px;
   }
@@ -240,5 +255,13 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .ModalContent-explore {
+    width: 100%;
+    height: 90vh;
+    padding: 36px;
+    border-radius: 0px;
+    padding-block: 60px;
   }
 }

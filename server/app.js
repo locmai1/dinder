@@ -170,9 +170,29 @@ app.post("/events/add", authenticate, async (req, res) => {
 
 app.get("/events", authenticate, async (req, res) => {
   try {
+    const userId = req.user._id;
     const events = await Event.find();
 
-    res.json({ events });
+    const hostPromises = events.map(async (event) => {
+      const host = await User.findOne({ _id: event.host });
+      return host ? host.name : "Unknown Host";
+    });
+
+    const pendingStatusPromises = events.map(async (event) => {
+      const isUserPending = event.pendingUsers.includes(userId);
+      return isUserPending;
+    });
+
+    const hostNames = await Promise.all(hostPromises);
+    const pendingStatuses = await Promise.all(pendingStatusPromises);
+
+    const eventsWithDetails = events.map((event, index) => ({
+      ...event.toObject(),
+      hostName: hostNames[index],
+      isUserPending: pendingStatuses[index],
+    }));
+
+    res.json({ events: eventsWithDetails });
   } catch (err) {
     console.error("Error fetching events:", err);
     res.status(500).json({ error: "Internal Server Error" });

@@ -41,7 +41,7 @@ export default function ExploreFilter({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="ModalBackground">
-        <div className="ModalContent">
+        <div className="ModalContent-explore">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ fontSize: 36, fontWeight: "700" }}>Filter by</div>
             <Icon
