@@ -1,53 +1,53 @@
 .LoginContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 14px;
-	padding: 162px 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 162px 35%;
 }
 
 .LoginInput {
-	border-radius: 5px;
-	background-color: #edf1f6;
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-	border: none;
-	font-size: 16px;
-	padding: 15px;
-	padding-inline: 8px;
+  border-radius: 5px;
+  background-color: #edf1f6;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  font-size: 16px;
+  padding: 15px;
+  padding-inline: 8px;
 }
 
 .LoginTitle {
-	font-size: 48px;
-	font-weight: 700;
-	text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .LoginSubtitle {
-	font-size: 16px;
-	font-weight: 700;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .LoginButton {
-	font-weight: 700;
-	width: 100%;
-	height: 52px;
-	border-radius: 5px;
-	background: #ffd233;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-	margin-top: 8px;
-	cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+  height: 52px;
+  border-radius: 5px;
+  background: #ffd233;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 8px;
+  cursor: pointer;
 }
 
 .LoginSignUpText {
-	color: black;
-	text-align: center;
-	margin-top: 8px;
+  color: black;
+  text-align: center;
+  margin-top: 8px;
 }
 
 @media (max-width: 430px) {
-	.LoginContainer {
-		padding: 162px 10%;
-	}
+  .LoginContainer {
+    padding: 162px 10%;
+  }
 }
