@@ -16,10 +16,7 @@ const eventSchema = new Schema({
     required: true,
   },
   meetingLocation: {
-    type: {
-      latitude: Number,
-      longitude: Number,
-    },
+    type: String,
     required: true,
   },
   type: {
