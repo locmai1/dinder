@@ -32,7 +32,6 @@
     "node": "20.x"
   },
   "proxy": "http://localhost:3001",
-  "homepage": "https://young-eyrie-30174-0a5261847da9.herokuapp.com/",
   "scripts": {
     "start:server": "nodemon server/app.js",
     "start:client": "react-scripts start",
