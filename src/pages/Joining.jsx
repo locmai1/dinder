@@ -6,16 +6,16 @@ export default function Joining() {
   const [joinedEvents, setJoinedEvents] = useState([]);
   const [pendingEvents, setPendingEvents] = useState([]);
 
-  const calculateHoursAgo = (dateTime) => {
-    const now = new Date();
-    const timeDifference = now - new Date(dateTime);
-    const hoursAgo = Math.round(timeDifference / (1000 * 60 * 60));
-    return hoursAgo;
-  };
-
   const formatDate = (dateTime) => {
     const options = { month: "short", day: "numeric" };
     return new Date(dateTime).toLocaleDateString("en-US", options);
+  };
+
+  const getHoursAndMinutesFromDate = (date) => {
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+
+    return `${hours}:${minutes}`;
   };
 
   useEffect(() => {
@@ -58,9 +58,9 @@ export default function Joining() {
             <div className="event" key={index}>
               <div className="event-head-joining">
                 <div className="event-title-hours">
-                  <div className="event-title">{event.mealType}</div>
-                  <div className="event-hours-ago">
-                    {calculateHoursAgo(event.dateTime)} hrs ago
+                  <div className="event-title">
+                    {event.mealType} @{" "}
+                    {getHoursAndMinutesFromDate(event.dateTime)}
                   </div>
                 </div>
                 <div>{event.host.name}</div>
@@ -104,9 +104,9 @@ export default function Joining() {
             <div className="event" key={index}>
               <div className="event-head-joining">
                 <div className="event-title-hours">
-                  <div className="event-title">{event.mealType}</div>
-                  <div className="event-hours-ago">
-                    {calculateHoursAgo(event.dateTime)} hrs ago
+                  <div className="event-title">
+                    {event.mealType} @{" "}
+                    {getHoursAndMinutesFromDate(event.dateTime)}
                   </div>
                 </div>
                 <div>{event.host.name}</div>
