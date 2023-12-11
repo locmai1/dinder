@@ -9,11 +9,11 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:3001";
+  // const baseURL = "http://localhost:3001";
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(baseURL + "/users/login", {
+      const response = await fetch("/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

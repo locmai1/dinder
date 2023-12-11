@@ -18,8 +18,6 @@ export default function Explore() {
   const [purposeIndexes, setPurposeIndexes] = useState([]);
   const [events, setEvents] = useState([]);
 
-  const baseURL = "http://localhost:3001";
-
   const calculateHoursAgo = (dateTime) => {
     const now = new Date();
     const timeDifference = now - new Date(dateTime);
@@ -76,7 +74,7 @@ export default function Explore() {
   useEffect(() => {
     const fetchAllEvents = async () => {
       try {
-        const response = await fetch(baseURL + "/events", {
+        const response = await fetch("/events", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -100,7 +98,7 @@ export default function Explore() {
 
   const requestEvent = async (id) => {
     try {
-      const response = await fetch(baseURL + "/events/request/" + id, {
+      const response = await fetch("/events/request/" + id, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
