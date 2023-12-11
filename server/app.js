@@ -20,12 +20,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // app.use(express.static(path.join(__dirname, "public")));
-// Serve static files from the 'build' directory
-app.use(express.static(path.join(__dirname, "build")));
+const CLIENT_BUILD_DIR = path.join(__dirname, "../build");
 
-// Catch-all route to serve 'index.html' for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+app.use(express.static(CLIENT_BUILD_DIR));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(CLIENT_BUILD_DIR, "index.html"));
 });
 
 const dbURI = config.dbURI;
