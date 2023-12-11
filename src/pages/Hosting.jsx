@@ -5,15 +5,13 @@ import { useState, useEffect } from "react";
 import CreateModal from "../components/CreateModal";
 
 export default function Hosting() {
-  const baseURL = "http://localhost:3001";
-
   const [hostedEvents, setHostedEvents] = useState([]);
   const [createModalOpen, setCreateModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchHostingData = async () => {
       try {
-        const response = await fetch(baseURL + "/events/host", {
+        const response = await fetch("/events/host", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,7 +35,7 @@ export default function Hosting() {
 
   const denyUserRequest = async (userEmail, eventId) => {
     try {
-      const response = await fetch(baseURL + "/events/deny/" + eventId, {
+      const response = await fetch("/events/deny/" + eventId, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -58,7 +56,7 @@ export default function Hosting() {
 
   const approveUserRequest = async (userEmail, eventId) => {
     try {
-      const response = await fetch(baseURL + "/events/approve/" + eventId, {
+      const response = await fetch("/events/approve/" + eventId, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

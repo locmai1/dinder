@@ -21,7 +21,7 @@ export default function Joining() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:3001/events/join", {
+        const response = await fetch("/events/join", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -34,8 +34,6 @@ export default function Onboarding() {
   const [interestsIndexes, setInterestsIndexes] = useState([]);
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:3001";
-
   const updateUserData = async () => {
     try {
       const selectedRestrictions = restrictionsIndexes.map(
@@ -45,7 +43,7 @@ export default function Onboarding() {
         (index) => interests[index]
       );
 
-      const response = await fetch(baseURL + "/users/edit", {
+      const response = await fetch("/users/edit", {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -194,10 +192,7 @@ export default function Onboarding() {
           ))}
         </div>
       </div>
-      <div
-        className="OnboardingYellowButton"
-        onClick={() => updateUserData()}
-      >
+      <div className="OnboardingYellowButton" onClick={() => updateUserData()}>
         Get started
       </div>
     </div>
