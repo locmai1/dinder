@@ -11,7 +11,6 @@ const config = require("./config/config");
 const User = require("./models/userModel");
 const Event = require("./models/eventModel");
 const path = require("path");
-// require("dotenv").config();
 
 const app = express();
 
@@ -20,13 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, "build")));
-// const CLIENT_BUILD_DIR = path.join(__dirname, "build");
 
-// app.use(express.static(CLIENT_BUILD_DIR));
-
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(CLIENT_BUILD_DIR, "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 const dbURI = config.dbURI;
 mongoose
