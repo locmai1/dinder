@@ -11,6 +11,7 @@ const config = require("./config/config");
 const User = require("./models/userModel");
 const Event = require("./models/eventModel");
 const path = require("path");
+require("dotenv").config();
 
 const app = express();
 
@@ -18,10 +19,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "public")));
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../public/index.html"));
-// });
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build"));
+});
 
 const dbURI = config.dbURI;
 mongoose
@@ -480,7 +482,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Dinder's backend!" });
 });
 
-const port = config.port || 3001;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
